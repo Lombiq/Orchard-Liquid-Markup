@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using DotLiquid;
 using Lombiq.LiquidMarkup.Models;
+using Lombiq.LiquidMarkup.Services.Tags;
 using Orchard.Caching.Services;
 using Orchard.DisplayManagement.Implementation;
 using Orchard.DisplayManagement.Shapes;
@@ -68,6 +69,8 @@ namespace Lombiq.LiquidMarkup.Services
             // Currently only global configuration is possible, see: https://github.com/formosatek/dotliquid/issues/93
             Template.NamingConvention = new DotLiquid.NamingConventions.CSharpNamingConvention();
             Template.RegisterSafeType(typeof(ShapeMetadata), new[] { "Type", "DisplayType", "Position", "PlacementSource", "Prefix", "Wrappers", "Alternates", "WasExecuted" });
+            Template.RegisterTag<StyleTag>("style");
+            Template.RegisterTag<ScriptTag>("script");
 
             _templateIsConfigured = true;
         }
