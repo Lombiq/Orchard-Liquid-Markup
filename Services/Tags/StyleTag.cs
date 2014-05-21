@@ -18,7 +18,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             base.Initialize(tagName, markup, tokens);
 
-            _url = markup.Trim().Trim('"', '\'');
+            _url = markup.TrimParameter();
         }
 
         public override void Render(Context context, TextWriter result)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Orchard;
 
-namespace Lombiq.LiquidMarkup
+namespace System.Web
 {
     internal static class HttpContextExtensions
     {

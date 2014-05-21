@@ -11,7 +11,7 @@ namespace Lombiq.LiquidMarkup.Models
     public class StaticShape : IIndexable, ILiquidizable
     {
         private readonly dynamic _shape;
-
+        public dynamic Shape { get { return _shape; } }
         public ShapeMetadata Metadata { get { return _shape.Metadata; } }
         public string Id { get { return _shape.Id; } }
         public IList<string> Classes { get { return _shape.Classes; } }

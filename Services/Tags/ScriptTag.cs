@@ -22,7 +22,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
             var parametersCommaSeparated = markup.Trim();
             var parameters = parametersCommaSeparated
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(parameter => parameter.Trim().Trim('"', '\''));
+                .Select(parameter => parameter.TrimParameter());
 
             if (!parameters.Any()) return;
 

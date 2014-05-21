@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using DotLiquid;
 using Lombiq.LiquidMarkup.Models;
+using Lombiq.LiquidMarkup.Services.Filters;
 using Lombiq.LiquidMarkup.Services.Tags;
 using Orchard.Caching.Services;
 using Orchard.DisplayManagement.Implementation;
@@ -37,13 +38,7 @@ namespace Lombiq.LiquidMarkup.Services
         {
             EnsureTemplateConfigured();
 
-            dynamic templateModel = null;
-
-            if (model is Orchard.DisplayManagement.Shapes.Shape)
-            {
-                templateModel = new StaticShape(model);
-            }
-
+            var templateModel = new StaticShape(model);
 
             var liquidTemplate = _cacheService.Get(template, () => Template.Parse(template));
             return liquidTemplate.Render(new RenderParameters
@@ -71,6 +66,7 @@ namespace Lombiq.LiquidMarkup.Services
             Template.RegisterSafeType(typeof(ShapeMetadata), new[] { "Type", "DisplayType", "Position", "PlacementSource", "Prefix", "Wrappers", "Alternates", "WasExecuted" });
             Template.RegisterTag<StyleTag>("style");
             Template.RegisterTag<ScriptTag>("script");
+            Template.RegisterFilter(typeof(DisplayFilter));
 
             _templateIsConfigured = true;
         }
