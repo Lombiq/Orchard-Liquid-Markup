@@ -66,6 +66,8 @@ namespace Lombiq.LiquidMarkup.Services
             Template.RegisterSafeType(typeof(ShapeMetadata), new[] { "Type", "DisplayType", "Position", "PlacementSource", "Prefix", "Wrappers", "Alternates", "WasExecuted" });
             Template.RegisterTag<StyleTag>("style");
             Template.RegisterTag<ScriptTag>("script");
+            Template.RegisterTag<DisplayTag>("display");
+            Template.RegisterTag<DisplayTag>("Display");
             Template.RegisterFilter(typeof(DisplayFilter));
 
             _templateIsConfigured = true;

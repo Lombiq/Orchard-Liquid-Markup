@@ -11,5 +11,13 @@ namespace System
         {
             return input.Trim().Trim('"', '\'');
         }
+
+        public static IEnumerable<string> ParseParameters(this string input)
+        {
+            var parametersCommaSeparated = input.Trim();
+            return parametersCommaSeparated
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(parameter => parameter.TrimParameter());
+        }
     }
 }

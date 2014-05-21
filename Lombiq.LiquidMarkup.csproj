@@ -102,6 +102,7 @@
     <Compile Include="Services\Filters\DisplayFilter.cs" />
     <Compile Include="Services\LiquidTemplateProcessor.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />
+    <Compile Include="Services\Tags\DisplayTag.cs" />
     <Compile Include="Services\Tags\ScriptTag.cs" />
     <Compile Include="Services\Tags\StyleTag.cs" />
   </ItemGroup>

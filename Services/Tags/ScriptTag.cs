@@ -19,10 +19,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             base.Initialize(tagName, markup, tokens);
 
-            var parametersCommaSeparated = markup.Trim();
-            var parameters = parametersCommaSeparated
-                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(parameter => parameter.TrimParameter());
+            var parameters = markup.ParseParameters();
 
             if (!parameters.Any()) return;
 
