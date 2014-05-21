@@ -99,8 +99,12 @@
   <ItemGroup>
     <Compile Include="Models\StaticShape.cs" />
     <Compile Include="Services\LiquidTemplateProcessor.cs" />
+    <Compile Include="HttpContextExtensions.cs" />
     <Compile Include="Services\Tags\ScriptTag.cs" />
     <Compile Include="Services\Tags\StyleTag.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\Filters\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

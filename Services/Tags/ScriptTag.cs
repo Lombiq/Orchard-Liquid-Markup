@@ -36,9 +36,9 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
         public override void Render(Context context, TextWriter result)
         {
-            if (HttpContext.Current == null || string.IsNullOrEmpty(_url)) return;
+            if (string.IsNullOrEmpty(_url)) return;
 
-            var wc = HttpContext.Current.Request.RequestContext.GetWorkContext();
+            var wc = HttpContext.Current.GetWorkContext();
 
             if (wc == null) return;
 
