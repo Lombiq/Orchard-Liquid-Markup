@@ -14,4 +14,4 @@ Features:
 		Name: Liquid Markup Templates
         Description: Extends Orchard.Templates with adding templates written in Liquid Markup (http://liquidmarkup.org/).
 		Category: Content
-		Dependencies: Orchard.Templates, Orchard.Caching
+		Dependencies: Lombiq.LiquidMarkup, Orchard.Templates, Orchard.Caching
