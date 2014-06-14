@@ -107,6 +107,9 @@
     <Compile Include="Services\Tags\DisplayTag.cs" />
     <Compile Include="Services\Tags\ScriptTag.cs" />
     <Compile Include="Services\Tags\StyleTag.cs" />
+    <Compile Include="Services\ViewEngine\LiquidView.cs" />
+    <Compile Include="Services\ViewEngine\LiquidViewEngine.cs" />
+    <Compile Include="Services\ViewEngine\LiquidViewEngineProvider.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

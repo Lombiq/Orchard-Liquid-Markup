@@ -10,8 +10,14 @@ Features:
 		Name: Liquid Markup
         Description: Adds support for templates written in Liquid Markup (http://liquidmarkup.org/). Uses DotLiquid (http://dotliquidmarkup.org/).
 		Category: Developer
+		Dependencies: Orchard.Caching
     Lombiq.LiquidMarkup.Templates:
 		Name: Liquid Markup Templates
         Description: Extends Orchard.Templates with adding templates written in Liquid Markup (http://liquidmarkup.org/).
 		Category: Content
-		Dependencies: Lombiq.LiquidMarkup, Orchard.Templates, Orchard.Caching
+		Dependencies: Lombiq.LiquidMarkup, Orchard.Templates
+    Lombiq.LiquidMarkup.ViewEngine:
+		Name: Liquid Markup View Engine
+        Description: Adds a view engine enabling the usage of templates written in Liquid Markup (http://liquidmarkup.org/) in themes.
+		Category: Content
+		Dependencies: Lombiq.LiquidMarkup
