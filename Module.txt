@@ -18,6 +18,6 @@ Features:
 		Dependencies: Lombiq.LiquidMarkup, Orchard.Templates
     Lombiq.LiquidMarkup.ViewEngine:
 		Name: Liquid Markup View Engine
-        Description: Adds a view engine enabling the usage of templates written in Liquid Markup (http://liquidmarkup.org/) in themes.
+        Description: Adds a view engine enabling the usage of templates written in Liquid Markup (http://liquidmarkup.org/) in themes and modules.
 		Category: Content
 		Dependencies: Lombiq.LiquidMarkup
