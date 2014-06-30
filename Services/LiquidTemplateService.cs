@@ -55,7 +55,9 @@ namespace Lombiq.LiquidMarkup.Services
             Template.NamingConvention = new DotLiquid.NamingConventions.CSharpNamingConvention();
             Template.RegisterSafeType(typeof(ShapeMetadata), new[] { "Type", "DisplayType", "Position", "PlacementSource", "Prefix", "Wrappers", "Alternates", "WasExecuted" });
             Template.RegisterTag<StyleTag>("style");
+            Template.RegisterTag<StyleTag>("stylerequire");
             Template.RegisterTag<ScriptTag>("script");
+            Template.RegisterTag<ScriptTag>("scriptrequire");
             Template.RegisterTag<DisplayTag>("display");
             Template.RegisterTag<DisplayTag>("Display");
             Template.RegisterFilter(typeof(DisplayFilter));

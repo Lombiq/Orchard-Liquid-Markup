@@ -11,7 +11,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 {
     public class ScriptTag : Tag
     {
-        private string _url;
+        private string _resourceReference;
         private ResourceLocation _location = ResourceLocation.Foot;
 
 
@@ -23,7 +23,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             if (!parameters.Any()) return;
 
-            _url = parameters.First();
+            _resourceReference = parameters.First();
 
             if (parameters.Count() == 2 && parameters.Last() == "head")
             {
@@ -33,13 +33,20 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
         public override void Render(Context context, TextWriter result)
         {
-            if (string.IsNullOrEmpty(_url)) return;
+            if (string.IsNullOrEmpty(_resourceReference)) return;
 
             var wc = HttpContext.Current.GetWorkContext();
 
             if (wc == null) return;
 
-            var script = wc.Resolve<IResourceManager>().Include("script", _url, _url);
+            var resourceManager = wc.Resolve<IResourceManager>();
+
+            RequireSettings script;
+
+            // _resourceReference can be a resource name or an URL.
+            if (TagName == "scriptrequire") script = resourceManager.Require("script", _resourceReference);
+            else script = resourceManager.Include("script", _resourceReference, _resourceReference);
+
             script.Location = _location;
         }
     }
