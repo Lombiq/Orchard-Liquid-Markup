@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using DotLiquid;
 using Orchard.DisplayManagement.Shapes;
+using Orchard.Localization;
 
 namespace Lombiq.LiquidMarkup.Models
 {
@@ -55,7 +56,7 @@ namespace Lombiq.LiquidMarkup.Models
 
                 if (item == null) return string.Empty;
 
-                if (item.GetType().IsPrimitive || item is decimal || item is string || item is DateTime)
+                if (item.GetType().IsPrimitive || item is decimal || item is string || item is DateTime || item is LocalizedString)
                 {
                     return item.ToString();
                 }

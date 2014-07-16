@@ -14,6 +14,9 @@ using Orchard.Templates.Services;
 
 namespace Lombiq.LiquidMarkup.Services
 {
+    /// <summary>
+    /// <see cref="ITemplateProcessor"/> implementation for Orchard.Templates that provides admin-editable Liquid templates.
+    /// </summary>
     [OrchardFeature("Lombiq.LiquidMarkup.Templates")]
     public class LiquidTemplateProcessor : ITemplateProcessor
     {
