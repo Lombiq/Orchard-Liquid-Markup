@@ -5,6 +5,7 @@ using System.Web;
 using DotLiquid;
 using Orchard.DisplayManagement.Shapes;
 using Orchard.Localization;
+using Orchard.Validation;
 
 namespace Lombiq.LiquidMarkup.Models
 {
@@ -17,12 +18,25 @@ namespace Lombiq.LiquidMarkup.Models
         public string Id { get { return _shape.Id; } }
         public IList<string> Classes { get { return _shape.Classes; } }
         public IDictionary<string, string> Attributes { get { return _shape.Attributes; } }
-        public IEnumerable<dynamic> Items { get { return _shape.Items; } }
+        private readonly Lazy<IEnumerable<dynamic>> _itemsLazy;
+        public IEnumerable<dynamic> Items { get { return _itemsLazy.Value; } }
 
 
         public StaticShape(dynamic shape)
         {
+            Argument.ThrowIfNull(shape, "shape");
+
             _shape = shape;
+
+            _itemsLazy = new Lazy<IEnumerable<dynamic>>(() =>
+            {
+                var items = new List<StaticShape>();
+                foreach (var item in _shape.Items)
+                {
+                    items.Add(new StaticShape(item));
+                }
+                return items;
+            });
         }
 
 
