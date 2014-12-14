@@ -19,5 +19,5 @@ Features:
     Lombiq.LiquidMarkup.ViewEngine:
         Name: Liquid Markup View Engine
         Description: Adds a view engine enabling the usage of template files in modules and themes written in Liquid Markup (http://liquidmarkup.org/) in themes and modules.
-        Category: Content
+        Category: Developer
         Dependencies: Lombiq.LiquidMarkup
