@@ -49,18 +49,36 @@ namespace Lombiq.LiquidMarkup.Models
         {
             get
             {
-                if (typeof(StaticShape).GetProperties().Any(property => property.Name == key.ToString()))
+                var keyString = key.ToString();
+
+                // Is key referring to a property on this class?
+                if (typeof(StaticShape).GetProperties().Any(property => property.Name == keyString))
                 {
-                    return typeof(StaticShape).GetProperty(key.ToString()).GetValue(this, null);
+                    return typeof(StaticShape).GetProperty(keyString).GetValue(this, null);
                 }
 
                 dynamic item = null;
                 if (!(_shape is Shape))
                 {
                     Type shapeType = _shape.GetType();
-                    if (shapeType.GetProperties().Any(property => property.Name == key.ToString()))
+
+                    // Is key referring to a property on _shape?
+                    if (shapeType.GetProperties().Any(property => property.Name == keyString))
                     {
-                        item = shapeType.GetProperty(key.ToString()).GetValue(_shape, null);
+                        item = shapeType.GetProperty(keyString).GetValue(_shape, null);
+                    }
+                    else
+                    {
+                        // Does _shape has an indexer for key?
+                        var indexer = shapeType.GetProperties()
+                            .Where(p => p.GetIndexParameters().Length != 0)
+                            .FirstOrDefault();
+
+                        if (indexer != null)
+                        {
+                            object[] indexArgs = { key };
+                            item = indexer.GetValue(_shape, indexArgs);
+                        }
                     }
                 }
                 else
