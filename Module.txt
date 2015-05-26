@@ -1,9 +1,9 @@
-﻿Name: Liquid Markup
+Name: Liquid Markup
 AntiForgery: enabled
 Author: Lombiq
 Website: http://orchardliquid.codeplex.com
 Version: 1.0
-OrchardVersion: 1.8
+OrchardVersion: 1.9.0
 Description: Adds support for templates written in Liquid Markup (http://liquidmarkup.org/). Uses DotLiquid (http://dotliquidmarkup.org/).
 Features:
     Lombiq.LiquidMarkup:
