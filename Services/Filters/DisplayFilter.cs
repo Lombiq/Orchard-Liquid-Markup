@@ -10,10 +10,11 @@ namespace Lombiq.LiquidMarkup.Services.Filters
 {
     public static class DisplayFilter
     {
-        public static string Display(Context context, StaticShape shape)
+        public static string Display(Context context, dynamic input)
         {
-            if (shape == null) return string.Empty;
+            if (input == null || !(input is StaticShape)) return string.Empty;
 
+            StaticShape shape = input;
             var wc = HttpContext.Current.GetWorkContext();
 
             if (wc == null) return string.Empty;
