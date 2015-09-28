@@ -86,7 +86,7 @@ namespace Lombiq.LiquidMarkup.Models
                     item = _shape[key];
                 }
 
-                if (item == null) return string.Empty;
+                if (item == null) return null;
 
                 if (item.GetType().IsPrimitive || item is decimal || item is string || item is DateTime || item is LocalizedString)
                 {
