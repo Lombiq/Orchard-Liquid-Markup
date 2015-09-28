@@ -88,6 +88,8 @@ namespace Lombiq.LiquidMarkup.Models
 
                 if (item == null) return null;
 
+                if (item is bool) return item;
+
                 if (item.GetType().IsPrimitive || item is decimal || item is string || item is DateTime || item is LocalizedString)
                 {
                     return item.ToString();
