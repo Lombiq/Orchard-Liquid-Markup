@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Web;
 using DotLiquid;
+using Microsoft.CSharp.RuntimeBinder;
 using Orchard.DisplayManagement.Shapes;
 using Orchard.Localization;
 using Orchard.Validation;
@@ -78,6 +82,22 @@ namespace Lombiq.LiquidMarkup.Models
                         {
                             object[] indexArgs = { key };
                             item = indexer.GetValue(_shape, indexArgs);
+                        }
+                        else
+                        {
+                            // Is this a dynamic object with a dynamic property (like with Model.ContentItem.TitlePart.Title)?
+                            var dynamicMetaObjectProvider = _shape as IDynamicMetaObjectProvider;
+                            if (dynamicMetaObjectProvider != null)
+                            {
+                                var objectParameter = Expression.Parameter(typeof(object));
+                                var metaObject = dynamicMetaObjectProvider.GetMetaObject(objectParameter);
+                                var binder = (GetMemberBinder)Microsoft.CSharp.RuntimeBinder.Binder.GetMember(0, keyString, shapeType, new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(0, null) });
+                                var getMemberBinding = metaObject.BindGetMember(binder);
+                                var finalExpression = Expression.Block(Expression.Label(CallSiteBinder.UpdateLabel), getMemberBinding.Expression);
+                                var lambda = Expression.Lambda(finalExpression, objectParameter);
+                                var compiledDelegate = lambda.Compile();
+                                item = compiledDelegate.DynamicInvoke(_shape);
+                            }
                         }
                     }
                 }
