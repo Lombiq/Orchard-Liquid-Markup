@@ -109,6 +109,7 @@
     <Compile Include="Services\ViewEngine\LiquidView.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngine.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngineProvider.cs" />
+    <Compile Include="Services\WorkContextShapeInjector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Licence.md" />
