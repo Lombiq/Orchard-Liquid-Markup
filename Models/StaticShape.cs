@@ -19,7 +19,7 @@ namespace Lombiq.LiquidMarkup.Models
         private readonly dynamic _shape;
         public dynamic Shape { get { return _shape; } }
         public ShapeMetadata Metadata { get { return _shape.Metadata; } }
-        public string Id { get { return _shape.Id; } }
+        public dynamic Id { get { return _shape.Id; } } // Depending on the shape the Id can be an int or string too.
         public IList<string> Classes { get { return _shape.Classes; } }
         public IDictionary<string, string> Attributes { get { return _shape.Attributes; } }
         private readonly Lazy<IEnumerable<dynamic>> _itemsLazy;
