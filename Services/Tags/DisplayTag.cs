@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using DotLiquid;
-using Lombiq.LiquidMarkup.Models;
 using Orchard.DisplayManagement;
 
 namespace Lombiq.LiquidMarkup.Services.Tags

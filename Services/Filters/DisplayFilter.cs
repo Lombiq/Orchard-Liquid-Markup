@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using DotLiquid;
 using Lombiq.LiquidMarkup.Models;
 using Orchard.DisplayManagement;
-using Orchard.Environment.Configuration;
-using Orchard.Logging;
-using Orchard.Mvc;
 
 namespace Lombiq.LiquidMarkup.Services.Filters
 {

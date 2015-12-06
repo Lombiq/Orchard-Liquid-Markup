@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using DotLiquid;
-using Lombiq.LiquidMarkup;
+﻿using Lombiq.LiquidMarkup;
 using Lombiq.LiquidMarkup.Models;
 using Orchard.DisplayManagement;
 
