@@ -4,14 +4,17 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using DotLiquid;
+using Lombiq.LiquidMarkup.Models;
 using Orchard.DisplayManagement;
 
 namespace Lombiq.LiquidMarkup.Services.Tags
 {
     public class DisplayTag : Tag
     {
+        private const string DisplayedShapeTypesKey = "DisplayedShapeTypes";
+
         private string _shapeType;
-        private Dictionary<string, object> _arguments = new Dictionary<string,object>();
+        private Dictionary<string, object> _arguments = new Dictionary<string, object>();
 
 
         public override void Initialize(string tagName, string markup, List<string> tokens)
@@ -49,7 +52,16 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             if (wc == null) return;
 
-            result.Write(wc.Resolve<IShapeDisplay>().Display(wc.Resolve<IShapeFactory>().Create(_shapeType, Arguments.From(_arguments))));
+            if (!context.ShapeIsWithinAllowedRecursionDepth(_shapeType))
+            {
+                wc.LogSecurityNotificationWithContext(typeof(DisplayTag), "Too many recursive shape display prevented.");
+
+                return;
+            }
+
+            var shape = wc.Resolve<IShapeFactory>().Create(_shapeType, Arguments.From(_arguments));
+            context.AddCurrentShapeAsParentToShape(shape);
+            result.Write(wc.Resolve<IShapeDisplay>().Display(shape));
         }
     }
 }
