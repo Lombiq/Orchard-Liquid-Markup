@@ -9,14 +9,11 @@ namespace System.Web
     {
         public static void LogSecurityNotificationWithContext(this WorkContext wc, Type callerType, string message)
         {
-            var shellName = wc.Resolve<ShellSettings>().Name;
-            var httpContext = wc.Resolve<IHttpContextAccessor>().Current();
-            var requestUrl = httpContext != null ? httpContext.Request.Url.ToString() : "(no HTTP context)";
-
+            // Logging the tenant name, because the logger can't always find it out (the URL is also logged by the logger).
             wc
                 .Resolve<ILoggerFactory>()
                 .CreateLogger(callerType)
-                .Error(message, " Tenant: " + shellName + " URL: " + requestUrl);
+                .Error(message + " Tenant: " + wc.Resolve<ShellSettings>().Name);
         }
     }
 }
