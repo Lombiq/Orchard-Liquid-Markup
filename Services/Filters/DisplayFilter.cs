@@ -32,7 +32,7 @@ namespace Lombiq.LiquidMarkup.Services.Filters
 
             if (!context.ShapeIsWithinAllowedRecursionDepth(shape.Metadata.Type))
             {
-                wc.LogSecurityNotificationWithContext(typeof(DisplayFilter), "Too many recursive shape display prevented.");
+                wc.LogSecurityNotificationWithContext(typeof(DisplayFilter), "Too many recursive shape displays prevented.");
 
                 return string.Empty;
             }

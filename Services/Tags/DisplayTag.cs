@@ -53,7 +53,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             if (!context.ShapeIsWithinAllowedRecursionDepth(_shapeType))
             {
-                wc.LogSecurityNotificationWithContext(typeof(DisplayTag), "Too many recursive shape display prevented.");
+                wc.LogSecurityNotificationWithContext(typeof(DisplayTag), "Too many recursive shape displays prevented.");
 
                 return;
             }
