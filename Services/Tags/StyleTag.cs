@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
 using DotLiquid;
-using Orchard;
 using Orchard.UI.Resources;
 
 namespace Lombiq.LiquidMarkup.Services.Tags

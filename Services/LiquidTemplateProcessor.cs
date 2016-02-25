@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using DotLiquid;
-using Lombiq.LiquidMarkup.Models;
-using Lombiq.LiquidMarkup.Services.Filters;
-using Lombiq.LiquidMarkup.Services.Tags;
-using Orchard.Caching.Services;
-using Orchard.DisplayManagement.Implementation;
-using Orchard.DisplayManagement.Shapes;
+﻿using Orchard.DisplayManagement.Implementation;
 using Orchard.Environment.Extensions;
 using Orchard.Templates.Services;
 

@@ -14,7 +14,8 @@
     <AssemblyName>Lombiq.LiquidMarkup</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews Condition=" '$(BuildViews)' == 'true' ">true</MvcBuildViews>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation />
     <TargetFrameworkProfile />
@@ -96,7 +97,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Extensions\ContextExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\WorkContextExtensions.cs" />
     <Compile Include="Models\StaticShape.cs" />
     <Compile Include="Services\Filters\DisplayFilter.cs" />
     <Compile Include="Services\ILiquidTemplateService.cs" />
@@ -109,10 +113,12 @@
     <Compile Include="Services\ViewEngine\LiquidView.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngine.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngineProvider.cs" />
+    <Compile Include="Services\WorkContextShapeInjector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Licence.md" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -147,7 +153,8 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>45979</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl></IISUrl>
+          <IISUrl>
+          </IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>True</UseCustomServer>
           <CustomServerUrl>http://orchard.codeplex.com</CustomServerUrl>
