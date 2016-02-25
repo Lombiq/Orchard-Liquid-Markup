@@ -7,12 +7,6 @@
 Orchard module for adding support for templates written in Liquid Markup (http://liquidmarkup.org/). Uses DotLiquid (http://dotliquidmarkup.org/).
 
 
-## Features
-
-- Can aggregate Markdown pages and corresponding files from a Bitbucket repository
-- Options to set up mappings between local urls and repository paths as well as specifying the maximal size of files to be mirrored (if mirroring at all)
-
-
 ## Documentation
 
 ### Overview
