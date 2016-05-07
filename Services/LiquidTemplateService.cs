@@ -49,7 +49,9 @@ namespace Lombiq.LiquidMarkup.Services
 
             // Currently only global configuration is possible, see: https://github.com/formosatek/dotliquid/issues/93
             Template.NamingConvention = new DotLiquid.NamingConventions.CSharpNamingConvention();
-            Template.RegisterSafeType(typeof(ShapeMetadata), new[] { "Type", "DisplayType", "Position", "PlacementSource", "Prefix", "Wrappers", "Alternates", "WasExecuted" });
+            Template.RegisterSafeType(
+                typeof(ShapeMetadata),
+                new[] { "Type", "DisplayType", "Position", "PlacementSource", "Prefix", "Wrappers", "Alternates", "WasExecuted" });
             Template.RegisterTag<StyleTag>("style");
             Template.RegisterTag<StyleTag>("stylerequire");
             Template.RegisterTag<ScriptTag>("script");
