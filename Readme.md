@@ -81,6 +81,9 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{% display User, 'Parameter1: some value', 'Parameter2: some other value' %}
 	These then can be use from inside the User shape as Model.ParameterName.
 
+
+## Contribution notes
+
 The module's source is available in two public source repositories, automatically mirrored in both directions with [Git-hg Mirror](https://githgmirror.com):
 
 - [https://bitbucket.org/Lombiq/orchard-liquid-markup](https://bitbucket.org/Lombiq/orchard-liquid-markup) (Mercurial repository)
