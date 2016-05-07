@@ -84,7 +84,18 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{% Display User, Parameter1: "some value", Parameter2: "some other value" %}
 	These then can be use from inside the User shape as Model.ParameterName.
 
-#### Other Orchard-specific tags
+#### Changing global properties of the HTML document
+
+	Adds a <link> tag to the head of the document. The same as the following in Razor: 
+	RegisterLink(new Orchard.UI.Resources.LinkEntry
+		{
+			Condition = "gte IE 7",
+			Href = "https://en.wikipedia.org/static/favicon/wikipedia.ico",
+			Rel = "shortcut icon",
+			Title = "favicon",
+			Type = "image/x-icon"
+		});
+	{% RegisterLink, Condition: "gte IE 7", Href: "https://en.wikipedia.org/static/favicon/wikipedia.ico", Rel: "shortcut icon", Title: "favicon", Type: "image/x-icon" %}
 
 	Sets the title of the current page. Equivalent to using Html.Title("Title comes here"); in Razor.
     {% PageTitle "Title comes here" %}

@@ -60,6 +60,8 @@ namespace Lombiq.LiquidMarkup.Services
             Template.RegisterTag<DisplayTag>("Display");
             Template.RegisterTag<PageTitleTag>("pagetitle");
             Template.RegisterTag<PageTitleTag>("PageTitle");
+            Template.RegisterTag<RegisterLinkTag>("registerlink");
+            Template.RegisterTag<RegisterLinkTag>("RegisterLink");
             Template.RegisterTag<ScriptTag>("script");
             Template.RegisterTag<ScriptTag>("Script");
             Template.RegisterTag<ScriptTag>("scriptrequire");

@@ -13,34 +13,19 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         private const string DisplayedShapeTypesKey = "DisplayedShapeTypes";
 
         private string _shapeType;
-        private Dictionary<string, object> _arguments = new Dictionary<string, object>();
+        private IEnumerable<KeyValuePair<string, string>> _arguments;
 
 
         public override void Initialize(string tagName, string markup, List<string> tokens)
         {
             base.Initialize(tagName, markup, tokens);
 
-            var parameters = markup.ParseParameters();
+            var parameters = markup.ParseNamedParameters();
 
             if (!parameters.Any()) return;
 
-            _shapeType = parameters.First();
-
-            if (parameters.Count() > 1)
-            {
-                foreach (var parameter in parameters.Skip(1))
-                {
-                    var parameterSegments = parameter
-                        .Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(segment => segment.TrimStringParameter())
-                        .ToArray();
-
-                    if (parameterSegments.Length == 2)
-                    {
-                        _arguments[parameterSegments[0]] = parameterSegments[1];
-                    }
-                }
-            }
+            _shapeType = parameters.First().Key;
+            _arguments = parameters.Skip(1);
         }
 
         public override void Render(Context context, TextWriter result)
@@ -58,7 +43,8 @@ namespace Lombiq.LiquidMarkup.Services.Tags
                 return;
             }
 
-            var shape = wc.Resolve<IShapeFactory>().Create(_shapeType, Arguments.From(_arguments));
+            var argumentsDictionary = _arguments.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value);
+            var shape = wc.Resolve<IShapeFactory>().Create(_shapeType, Arguments.From(argumentsDictionary));
             context.AddCurrentShapeAsParentToShape(shape);
             result.Write(wc.Resolve<IShapeDisplay>().Display(shape));
         }
