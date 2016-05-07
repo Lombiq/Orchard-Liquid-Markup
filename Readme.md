@@ -97,6 +97,16 @@ The properties on the WorkContext (and the properties of those objects) are also
 		});
 	{% RegisterLink, Condition: "gte IE 7", Href: "https://en.wikipedia.org/static/favicon/wikipedia.ico", Rel: "shortcut icon", Title: "favicon", Type: "image/x-icon" %}
 
+	Adds a <meta> tag to the head of the document (or modifies an existing one). The same as the following in Razor:
+	SetMeta(new Orchard.UI.Resources.MetaEntry
+		{
+			Charset = "utf-8",
+			Content = "Wordpress",
+			HttpEquiv = "X-Generator",
+			Name = "generator"
+		});
+	{% SetMeta, Charset: "utf-8", Content: "Wordpress", HttpEquiv: "X-Generator", Name: "generator" %}
+
 	Sets the title of the current page. Equivalent to using Html.Title("Title comes here"); in Razor.
     {% PageTitle "Title comes here" %}
 

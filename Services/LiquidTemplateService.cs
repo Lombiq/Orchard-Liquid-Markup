@@ -70,6 +70,8 @@ namespace Lombiq.LiquidMarkup.Services
             Template.RegisterTag<StyleTag>("Style");
             Template.RegisterTag<StyleTag>("stylerequire");
             Template.RegisterTag<StyleTag>("StyleRequire");
+            Template.RegisterTag<SetMetaTag>("setmeta");
+            Template.RegisterTag<SetMetaTag>("SetMeta");
 
             // Filters:
             Template.RegisterFilter(typeof(DisplayFilter));

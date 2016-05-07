@@ -112,6 +112,7 @@
     <Compile Include="Services\Tags\PageTitleTag.cs" />
     <Compile Include="Services\Tags\RegisterLinkTag.cs" />
     <Compile Include="Services\Tags\ScriptTag.cs" />
+    <Compile Include="Services\Tags\SetMetaTag.cs" />
     <Compile Include="Services\Tags\StyleTag.cs" />
     <Compile Include="Services\ViewEngine\LiquidView.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngine.cs" />
