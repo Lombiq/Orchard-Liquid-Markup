@@ -117,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Licence.md" />
+    <Content Include="Readme.md" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
