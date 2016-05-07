@@ -27,6 +27,8 @@ Note that since Liquid was designed to be safe you can't call arbitrary methods 
 
 Note that although presented here with C#-style notation, custom tags are usable all lowercase too (tags are conventionally all lowercase in Liquid). E.g. these are both valid: `{% Display User %}`, `{% display User %}`.
 
+Also while strings are wrapped in double quotes here single quotes (`'`) work equally.
+
 #### Accessing the model
 
 	Accessing shape properties:
@@ -57,15 +59,15 @@ The properties on the WorkContext (and the properties of those objects) are also
 #### Including static resources
 
 	Including stylesheets and scripts:
-	{% Style '/url/to/stylesheet.css' %}
+	{% Style "/url/to/stylesheet.css" %}
 	You can omit the single quotes or use double quotes instead if you wish.
 	
-	{% Script '/url/to/script.js', head %}
+	{% Script "/url/to/script.js", head %}
 	The second parameter is the script location: head or foot. The default is foot so you can omit the parameter if you want to include the script in the footer.
 	
 	You can also reference resources by their names if they are defined in an enabled feature:
-	{% ScriptRequire 'jQueryUI', head %}
-	{% StyleRequire 'jQueryUI_Orchard' %}
+	{% ScriptRequire "jQueryUI", head %}
+	{% StyleRequire "jQueryUI_Orchard" %}
 
 #### Working with shapes
 
@@ -79,8 +81,13 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{% Display User %}
 	
 	You can also give the shape input parameters as from C#:
-	{% Display User, 'Parameter1: some value', 'Parameter2: some other value' %}
+	{% Display User, "Parameter1: some value", "Parameter2: some other value" %}
 	These then can be use from inside the User shape as Model.ParameterName.
+
+#### Other Orchard-specific tags
+
+	Sets the title of the current page. Equivalent to using Html.Title("Title comes here"); in Razor.
+    {% PageTitle "Title comes here" %}
 
 
 ## Contribution notes

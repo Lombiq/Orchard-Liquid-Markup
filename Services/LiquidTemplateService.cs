@@ -56,16 +56,18 @@ namespace Lombiq.LiquidMarkup.Services
             
             // Tags:
             // Note that both Liquid-style all lowercase and C#-style CamelCase names are made available.
-            Template.RegisterTag<StyleTag>("style");
-            Template.RegisterTag<StyleTag>("Style");
-            Template.RegisterTag<StyleTag>("stylerequire");
-            Template.RegisterTag<StyleTag>("StyleRequire");
+            Template.RegisterTag<DisplayTag>("display");
+            Template.RegisterTag<DisplayTag>("Display");
+            Template.RegisterTag<PageTitleTag>("pagetitle");
+            Template.RegisterTag<PageTitleTag>("PageTitle");
             Template.RegisterTag<ScriptTag>("script");
             Template.RegisterTag<ScriptTag>("Script");
             Template.RegisterTag<ScriptTag>("scriptrequire");
             Template.RegisterTag<ScriptTag>("ScriptRequire");
-            Template.RegisterTag<DisplayTag>("display");
-            Template.RegisterTag<DisplayTag>("Display");
+            Template.RegisterTag<StyleTag>("style");
+            Template.RegisterTag<StyleTag>("Style");
+            Template.RegisterTag<StyleTag>("stylerequire");
+            Template.RegisterTag<StyleTag>("StyleRequire");
 
             // Filters:
             Template.RegisterFilter(typeof(DisplayFilter));

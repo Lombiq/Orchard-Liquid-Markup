@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using DotLiquid;
+using Orchard.UI.PageTitle;
+
+namespace Lombiq.LiquidMarkup.Services.Tags
+{
+    public class PageTitleTag : Tag
+    {
+        private string _title;
+
+
+        public override void Initialize(string tagName, string markup, List<string> tokens)
+        {
+            base.Initialize(tagName, markup, tokens);
+
+            _title = markup.TrimParameter();
+        }
+
+        public override void Render(Context context, TextWriter result)
+        {
+            if (string.IsNullOrEmpty(_title)) return;
+
+            var wc = HttpContext.Current.GetWorkContext();
+
+            if (wc == null) return;
+
+            var pageTitleBuilder = wc.Resolve<IPageTitleBuilder>();
+
+            pageTitleBuilder.AddTitleParts(_title);
+        }
+    }
+}

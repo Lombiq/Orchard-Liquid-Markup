@@ -108,6 +108,7 @@
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Services\LiquidTemplateService.cs" />
     <Compile Include="Services\Tags\DisplayTag.cs" />
+    <Compile Include="Services\Tags\PageTitleTag.cs" />
     <Compile Include="Services\Tags\ScriptTag.cs" />
     <Compile Include="Services\Tags\StyleTag.cs" />
     <Compile Include="Services\ViewEngine\LiquidView.cs" />
