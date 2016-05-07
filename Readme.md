@@ -81,7 +81,7 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{% Display User %}
 	
 	You can also give the shape input parameters as from C#:
-	{% Display User, "Parameter1: some value", "Parameter2: some other value" %}
+	{% Display User, Parameter1: "some value", Parameter2: "some other value" %}
 	These then can be use from inside the User shape as Model.ParameterName.
 
 #### Other Orchard-specific tags

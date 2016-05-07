@@ -22,7 +22,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             if (!parameters.Any()) return;
 
-            _resourceReference = parameters.First();
+            _resourceReference = parameters.First().TrimStringParameter();
 
             if (parameters.Count() == 2 && parameters.Last().Equals("head", StringComparison.InvariantCultureIgnoreCase))
             {

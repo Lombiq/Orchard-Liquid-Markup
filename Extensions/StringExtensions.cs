@@ -5,7 +5,7 @@ namespace System
 {
     public static class StringExtensions
     {
-        public static string TrimParameter(this string input)
+        public static string TrimStringParameter(this string input)
         {
             return input.Trim().Trim('"', '\'');
         }
@@ -15,7 +15,7 @@ namespace System
             var parametersCommaSeparated = input.Trim();
             return parametersCommaSeparated
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(parameter => parameter.TrimParameter());
+                .Select(parameter => parameter.Trim());
         }
     }
 }

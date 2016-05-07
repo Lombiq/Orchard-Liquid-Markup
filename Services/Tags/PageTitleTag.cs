@@ -17,7 +17,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             base.Initialize(tagName, markup, tokens);
 
-            _title = markup.TrimParameter();
+            _title = markup.TrimStringParameter();
         }
 
         public override void Render(Context context, TextWriter result)

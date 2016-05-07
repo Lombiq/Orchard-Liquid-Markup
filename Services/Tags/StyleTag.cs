@@ -16,7 +16,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             base.Initialize(tagName, markup, tokens);
 
-            _resourceReference = markup.TrimParameter();
+            _resourceReference = markup.TrimStringParameter();
         }
 
         public override void Render(Context context, TextWriter result)

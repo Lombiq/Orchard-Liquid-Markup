@@ -30,9 +30,9 @@ namespace Lombiq.LiquidMarkup.Services.Tags
             {
                 foreach (var parameter in parameters.Skip(1))
                 {
-                    var parameterSegments = parameter.TrimParameter()
+                    var parameterSegments = parameter
                         .Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(segment => segment.TrimParameter())
+                        .Select(segment => segment.TrimStringParameter())
                         .ToArray();
 
                     if (parameterSegments.Length == 2)
