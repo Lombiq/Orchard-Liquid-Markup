@@ -25,6 +25,8 @@ Note that since Liquid was designed to be safe you can't call arbitrary methods 
 
 ### Examples
 
+Note that although presented here with C#-style notation, custom tags are usable all lowercase too (tags are conventionally all lowercase in Liquid). E.g. these are both valid: `{% Display User %}`, `{% display User %}`.
+
 #### Accessing the model
 
 	Accessing shape properties:
@@ -55,15 +57,15 @@ The properties on the WorkContext (and the properties of those objects) are also
 #### Including static resources
 
 	Including stylesheets and scripts:
-	{% style '/url/to/stylesheet.css' %}
+	{% Style '/url/to/stylesheet.css' %}
 	You can omit the single quotes or use double quotes instead if you wish.
 	
-	{% script '/url/to/script.js', head %}
+	{% Script '/url/to/script.js', head %}
 	The second parameter is the script location: head or foot. The default is foot so you can omit the parameter if you want to include the script in the footer.
 	
 	You can also reference resources by their names if they are defined in an enabled feature:
-	{% scriptrequire 'jQueryUI', head %}
-	{% stylerequire 'jQueryUI_Orchard' %}
+	{% ScriptRequire 'jQueryUI', head %}
+	{% StyleRequire 'jQueryUI_Orchard' %}
 
 #### Working with shapes
 
@@ -74,11 +76,10 @@ The properties on the WorkContext (and the properties of those objects) are also
 	Note that there are no quotes around Model.Content!
 	
 	Displaying any shape with the display tag, here the User shape:
-	{% display User %}
-	For the sake of consistency the display tag (although tags are all lowercase in Liquid) is also available with a capital D.
+	{% Display User %}
 	
 	You can also give the shape input parameters as from C#:
-	{% display User, 'Parameter1: some value', 'Parameter2: some other value' %}
+	{% Display User, 'Parameter1: some value', 'Parameter2: some other value' %}
 	These then can be use from inside the User shape as Model.ParameterName.
 
 

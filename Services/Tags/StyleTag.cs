@@ -30,7 +30,10 @@ namespace Lombiq.LiquidMarkup.Services.Tags
             var resourceManager = wc.Resolve<IResourceManager>();
 
             // _resourceReference can be a resource name or an URL.
-            if (TagName == "stylerequire") resourceManager.Require("stylesheet", _resourceReference);
+            if (TagName.Equals("stylerequire", StringComparison.InvariantCultureIgnoreCase))
+            {
+                resourceManager.Require("stylesheet", _resourceReference);
+            }
             else resourceManager.Include("stylesheet", _resourceReference, _resourceReference);
         }
     }

@@ -24,7 +24,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             _resourceReference = parameters.First();
 
-            if (parameters.Count() == 2 && parameters.Last() == "head")
+            if (parameters.Count() == 2 && parameters.Last().Equals("head", StringComparison.InvariantCultureIgnoreCase))
             {
                 _location = ResourceLocation.Head;
             }
@@ -43,7 +43,10 @@ namespace Lombiq.LiquidMarkup.Services.Tags
             RequireSettings script;
 
             // _resourceReference can be a resource name or an URL.
-            if (TagName == "scriptrequire") script = resourceManager.Require("script", _resourceReference);
+            if (TagName.Equals("scriptrequire", StringComparison.InvariantCultureIgnoreCase))
+            {
+                script = resourceManager.Require("script", _resourceReference);
+            }
             else script = resourceManager.Include("script", _resourceReference, _resourceReference);
 
             script.Location = _location;
