@@ -108,6 +108,9 @@
     <Compile Include="Services\LiquidTemplateProcessor.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Services\LiquidTemplateService.cs" />
+    <Compile Include="Services\Tags\AddPageClassNamesTag.cs" />
+    <Compile Include="Services\Tags\ClassesParsingTagBase.cs" />
+    <Compile Include="Services\Tags\ClassForPageTag.cs" />
     <Compile Include="Services\Tags\DisplayTag.cs" />
     <Compile Include="Services\Tags\PageTitleTag.cs" />
     <Compile Include="Services\Tags\RegisterLinkTag.cs" />

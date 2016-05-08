@@ -27,6 +27,11 @@ namespace System
                 .Select(parameter => parameter.Trim());
         }
 
+        public static IEnumerable<string> ParseStringParameters(this string parametersCommaSeparated)
+        {
+            return parametersCommaSeparated.ParseParameters().Select(TrimStringParameter);
+        }
+
         public static IEnumerable<KeyValuePair<string, string>> ParseNamedParameters(this string parametersCommaSeparated)
         {
             return parametersCommaSeparated.ParseParameters().Select(ParseAsNamedParameter);

@@ -56,6 +56,10 @@ namespace Lombiq.LiquidMarkup.Services
             
             // Tags:
             // Note that both Liquid-style all lowercase and C#-style CamelCase names are made available.
+            Template.RegisterTag<AddPageClassNamesTag>("addpageclassnames");
+            Template.RegisterTag<AddPageClassNamesTag>("AddPageClassNames");
+            Template.RegisterTag<ClassForPageTag>("classforpage");
+            Template.RegisterTag<ClassForPageTag>("ClassForPage");
             Template.RegisterTag<DisplayTag>("display");
             Template.RegisterTag<DisplayTag>("Display");
             Template.RegisterTag<PageTitleTag>("pagetitle");

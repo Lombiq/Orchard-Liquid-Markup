@@ -86,7 +86,9 @@ The properties on the WorkContext (and the properties of those objects) are also
 
 #### Changing global properties of the HTML document
 
-	Adds a <link> tag to the head of the document. The same as the following in Razor: 
+	Adds a <link> tag to the head of the document.
+	{% RegisterLink, Condition: "gte IE 7", Href: "https://en.wikipedia.org/static/favicon/wikipedia.ico", Rel: "shortcut icon", Title: "favicon", Type: "image/x-icon" %}
+	The same as the following in Razor: 
 	RegisterLink(new Orchard.UI.Resources.LinkEntry
 		{
 			Condition = "gte IE 7",
@@ -95,9 +97,10 @@ The properties on the WorkContext (and the properties of those objects) are also
 			Title = "favicon",
 			Type = "image/x-icon"
 		});
-	{% RegisterLink, Condition: "gte IE 7", Href: "https://en.wikipedia.org/static/favicon/wikipedia.ico", Rel: "shortcut icon", Title: "favicon", Type: "image/x-icon" %}
 
-	Adds a <meta> tag to the head of the document (or modifies an existing one). The same as the following in Razor:
+	Adds a <meta> tag to the head of the document (or modifies an existing one).
+	{% SetMeta, Charset: "utf-8", Content: "Wordpress", HttpEquiv: "X-Generator", Name: "generator" %}
+	The same as the following in Razor:
 	SetMeta(new Orchard.UI.Resources.MetaEntry
 		{
 			Charset = "utf-8",
@@ -105,10 +108,21 @@ The properties on the WorkContext (and the properties of those objects) are also
 			HttpEquiv = "X-Generator",
 			Name = "generator"
 		});
-	{% SetMeta, Charset: "utf-8", Content: "Wordpress", HttpEquiv: "X-Generator", Name: "generator" %}
 
 	Sets the title of the current page. Equivalent to using Html.Title("Title comes here"); in Razor.
     {% PageTitle "Title comes here" %}
+
+	Set and output page classes like Html.ClassForPage(); would do in Razor:
+	{% ClassForPage, "custom-class" %}
+	Or multiple classes:
+	{% ClassForPage, "custom-class1", "custom-class2" %}
+	Can be also used to simply output the page classes:
+	{% ClassForPage %}
+
+	Sets page classes like Html.AddPageClassNames(); in Razor:
+	{% AddPageClassNames, "custom-class" %}
+	Or multiple classes:
+	{% AddPageClassNames, "custom-class1", "custom-class2" %}
 
 
 ## Contribution notes
