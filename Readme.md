@@ -126,6 +126,13 @@ The properties on the WorkContext (and the properties of those objects) are also
 	Or multiple classes:
 	{% AddPageClassNames, "custom-class1", "custom-class2" %}
 
+#### Accessing the antiforgery token
+
+	Displays a hidden form field with the antiforgery token. Equivalent to using Html.AntiForgeryTokenOrchard(); in Razor.
+	{% AntiForgeryTokenOrchard %}
+	Displays the value of the antiforgery token. Equivalent to using Html.AntiForgeryTokenValueOrchard(); in Razor.
+	{% AntiForgeryTokenValueOrchard %}
+
 
 ## Contribution notes
 

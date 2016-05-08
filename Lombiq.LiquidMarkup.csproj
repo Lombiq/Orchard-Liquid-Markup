@@ -109,6 +109,8 @@
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Services\LiquidTemplateService.cs" />
     <Compile Include="Services\Tags\AddPageClassNamesTag.cs" />
+    <Compile Include="Services\Tags\AntiForgeryTokenOrchardTag.cs" />
+    <Compile Include="Services\Tags\AntiForgeryTokenValueOrchardTag.cs" />
     <Compile Include="Services\Tags\ClassesParsingTagBase.cs" />
     <Compile Include="Services\Tags\ClassForPageTag.cs" />
     <Compile Include="Services\Tags\DisplayTag.cs" />
