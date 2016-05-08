@@ -13,9 +13,8 @@ using Orchard.Validation;
 namespace Lombiq.LiquidMarkup.Models
 {
     // Similar in idea to the StaticShape class in OrchardHUN.Scripting.Php
-    public class StaticShape : IIndexable, ILiquidizable
+    public class StaticShape : StaticShapeBase, IIndexable
     {
-        private readonly dynamic _shape;
         public dynamic Shape { get { return _shape; } }
         public ShapeMetadata Metadata { get { return _shape.Metadata; } }
         public dynamic Id { get { return _shape.Id; } } // Depending on the shape the Id can be an int or string too.
@@ -27,9 +26,7 @@ namespace Lombiq.LiquidMarkup.Models
 
         public StaticShape(dynamic shape)
         {
-            Argument.ThrowIfNull(shape, "shape");
-
-            _shape = shape;
+            Initalize(shape);
 
             _itemsLazy = new Lazy<IEnumerable<dynamic>>(() =>
             {
@@ -72,15 +69,20 @@ namespace Lombiq.LiquidMarkup.Models
                     }
                     else
                     {
-                        // Does _shape has an indexer for key?
                         var indexer = shapeType.GetProperties()
                             .Where(p => p.GetIndexParameters().Length != 0)
                             .FirstOrDefault();
 
                         if (indexer != null)
                         {
+                            // Does _shape has an indexer for key?
                             object[] indexArgs = { key };
                             item = indexer.GetValue(_shape, indexArgs);
+                        }
+                        else if (shapeType.IsArray)
+                        {
+                            // Is the shape an array?
+                            item = _shape[(int)key];
                         }
                         else
                         {
@@ -114,13 +116,22 @@ namespace Lombiq.LiquidMarkup.Models
                     return item.ToString();
                 }
 
+                // If the item is a collection then we make it indexable with an int. Otherwise wrapping e.g. a List
+                // into a StaticShape would cause an error since StaticShape implements IIndexable but the key will be
+                // attempted to be casted to string by DotLiquid.
+                var isIEnumerable = ((object)item)
+                    .GetType()
+                    .GetInterfaces()
+                    .Any(implemenetedInterface => 
+                        implemenetedInterface.IsGenericType && 
+                        implemenetedInterface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+                if (isIEnumerable)
+                {
+                    return new ListStaticShape(item);
+                }
+
                 return new StaticShape(item);
             }
-        }
-
-        public object ToLiquid()
-        {
-            return this;
         }
     }
 }

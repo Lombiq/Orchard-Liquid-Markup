@@ -41,8 +41,14 @@ Do note the following:
 	{{ Model.CurrentUser.UserName }}
 	{{ Model.CurrentUser.Email }}
 	
-	Dynamic expressions on ContentItems work, i.e. you can do this from the Content shape or content part shapes:
+	Dynamic expressions on ContentItems work, e.g. you can do this from the Content shape or content part shapes:
 	{{ Model.ContentItem.TitlePart.Title }}
+
+	Accessing array or list elements work as well. E.g. if you add a MediaLibraryPickerField on the Page content type with the name Images you'll be able to access the attached Image items (given that there are at least two) like following:
+	{{ Model.ContentItem.Page.Images.MediaParts[0].MediaUrl } <- First image.
+	{{ Model.ContentItem.Page.Images.MediaParts[1].MediaUrl } <- Second image.
+	{{ Model.ContentItem.Page.Images.Ids[0] }} <-- ID of the first image.
+	{{ Model.ContentItem.Page.Images.Ids[1] }} <-- ID of the second image.
 
 #### Accessing the WorkContext
 

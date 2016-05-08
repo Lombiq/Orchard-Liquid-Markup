@@ -102,7 +102,9 @@
     <Compile Include="Extensions\KeyValuePairExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WorkContextExtensions.cs" />
+    <Compile Include="Models\ListStaticShape.cs" />
     <Compile Include="Models\StaticShape.cs" />
+    <Compile Include="Models\StaticShapeBase.cs" />
     <Compile Include="Services\Filters\DisplayFilter.cs" />
     <Compile Include="Services\ILiquidTemplateService.cs" />
     <Compile Include="Services\LiquidTemplateProcessor.cs" />
