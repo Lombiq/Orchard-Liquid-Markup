@@ -32,7 +32,8 @@ namespace Lombiq.LiquidMarkup.Services.ViewEngine
         {
             var partialViewLocationFormats = new[]
             {
-                parameters.VirtualPath + "/Views/{0}.liquid"
+                parameters.VirtualPath + "/Views/{0}.liquid",
+                parameters.VirtualPath + "/Views/{1}/{0}.liquid"
             };
 
             var areaPartialViewLocationFormats = new[]
@@ -56,12 +57,10 @@ namespace Lombiq.LiquidMarkup.Services.ViewEngine
 
         public IViewEngine CreateModulesViewEngine(CreateModulesViewEngineParams parameters)
         {
-            var areaFormats = new[]
-            {
-                "~/Core/{2}/Views/{1}/{0}.liquid",
-                "~/Modules/{2}/Views/{1}/{0}.liquid",
-                "~/Themes/{2}/Views/{1}/{0}.liquid",
-            };
+            // Below three lines copied from RazorViewEngineProvider. Must revisit if that class changes.
+            // TBD: It would probably be better to determined the area deterministically from the module of the controller, 
+            // not by trial and error.
+            var areaFormats = parameters.ExtensionLocations.Select(location => location + "/{2}/Views/{1}/{0}.liquid").ToArray();
 
             var universalFormats = parameters.VirtualPaths
                 .SelectMany(
