@@ -92,6 +92,9 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{% Display User, Parameter1: "some value", Parameter2: "some other value" %}
 	These then can be use from inside the User shape as Model.Parameter1 and Model.Parameter2 respectively.
 
+	CSS classes can be added to shapes much like how Model.Classes.Add("pagination"); works in Razor:
+	{% AddClassToCurrentShape "pagination" %}
+
 #### Changing global properties of the HTML document
 
 	Adds a <link> tag to the head of the document.

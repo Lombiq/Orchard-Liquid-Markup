@@ -60,6 +60,8 @@ namespace Lombiq.LiquidMarkup.Services
             
             // Tags:
             // Note that both Liquid-style all lowercase and C#-style CamelCase names are made available.
+            Template.RegisterTag<AddClassToCurrentShapeTag>("addclasstocurrentshape");
+            Template.RegisterTag<AddClassToCurrentShapeTag>("AddClassToCurrentShape");
             Template.RegisterTag<AntiForgeryTokenOrchardTag>("antiforgerytokenorchard");
             Template.RegisterTag<AntiForgeryTokenOrchardTag>("AntiForgeryTokenOrchard");
             Template.RegisterTag<AntiForgeryTokenValueOrchardTag>("antiforgerytokenvalueorchard");

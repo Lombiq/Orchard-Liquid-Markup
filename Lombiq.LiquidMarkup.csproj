@@ -110,6 +110,7 @@
     <Compile Include="Services\LiquidTemplateProcessor.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Services\LiquidTemplateService.cs" />
+    <Compile Include="Services\Tags\AddClassToCurrentShapeTag.cs" />
     <Compile Include="Services\Tags\AddPageClassNamesTag.cs" />
     <Compile Include="Services\Tags\AntiForgeryTokenOrchardTag.cs" />
     <Compile Include="Services\Tags\AntiForgeryTokenValueOrchardTag.cs" />
