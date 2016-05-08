@@ -10,11 +10,11 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 {
     public class RegisterLinkTag : Tag
     {
-        private string _condition;
-        private string _href;
-        private string _rel;
-        private string _title;
-        private string _type;
+        private string _conditionParameter;
+        private string _hrefParameter;
+        private string _relParameter;
+        private string _titleParameter;
+        private string _typeParameter;
 
 
         public override void Initialize(string tagName, string markup, List<string> tokens)
@@ -23,11 +23,11 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             var parameters = markup.ParseNamedParameters();
 
-            _condition = parameters.FindParameterValue("condition");
-            _href = parameters.FindParameterValue("href");
-            _rel = parameters.FindParameterValue("rel");
-            _title = parameters.FindParameterValue("title");
-            _type = parameters.FindParameterValue("type");
+            _conditionParameter = parameters.FindParameterValue("condition");
+            _hrefParameter = parameters.FindParameterValue("href");
+            _relParameter = parameters.FindParameterValue("rel");
+            _titleParameter = parameters.FindParameterValue("title");
+            _typeParameter = parameters.FindParameterValue("type");
         }
 
         public override void Render(Context context, TextWriter result)
@@ -38,11 +38,11 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             resourceManager.RegisterLink(new LinkEntry
                 {
-                    Condition = _condition,
-                    Href = _href,
-                    Rel = _rel,
-                    Title = _title,
-                    Type = _type
+                    Condition = _conditionParameter.EvaluateAsStringProducingParameter(context),
+                    Href = _hrefParameter.EvaluateAsStringProducingParameter(context),
+                    Rel = _relParameter.EvaluateAsStringProducingParameter(context),
+                    Title = _titleParameter.EvaluateAsStringProducingParameter(context),
+                    Type = _typeParameter.EvaluateAsStringProducingParameter(context)
                 });
         }
     }

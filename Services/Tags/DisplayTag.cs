@@ -41,7 +41,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
                 return;
             }
 
-            var argumentsDictionary = _arguments.ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value);
+            var argumentsDictionary = _arguments.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.EvaluateAsParameter(context));
             var shape = wc.Resolve<IShapeFactory>().Create(_shapeType, Arguments.From(argumentsDictionary));
             context.AddCurrentShapeAsParentToShape(shape);
             result.Write(wc.Resolve<IShapeDisplay>().Display(shape));

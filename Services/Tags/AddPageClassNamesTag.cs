@@ -12,13 +12,9 @@ namespace Lombiq.LiquidMarkup.Services.Tags
     {
         public override void Render(Context context, TextWriter result)
         {
-            if (_classes == null || !_classes.Any()) return;
+            if (_classParameters == null || !_classParameters.Any()) return;
 
-            var wc = context.GetWorkContext();
-
-            var pageClassBuilder = wc.Resolve<IPageClassBuilder>();
-
-            pageClassBuilder.AddClassNames(_classes.Select(className => (object)className).ToArray());
+            context.GetWorkContext().Resolve<IPageClassBuilder>().AddClassNames(GetEvaluatedClassParameters(context));
         }
     }
 }

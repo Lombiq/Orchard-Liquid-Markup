@@ -8,14 +8,20 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 {
     public class ClassesParsingTagBase : Tag
     {
-        protected IEnumerable<string> _classes;
+        protected IEnumerable<string> _classParameters;
 
 
         public override void Initialize(string tagName, string markup, List<string> tokens)
         {
             base.Initialize(tagName, markup, tokens);
 
-            _classes = markup.ParseStringParameters();
+            _classParameters = markup.ParseParameters();
+        }
+
+
+        protected object[] GetEvaluatedClassParameters(Context context)
+        {
+            return _classParameters.Select(classParameter => classParameter.EvaluateAsParameter(context)).ToArray();
         }
     }
 }

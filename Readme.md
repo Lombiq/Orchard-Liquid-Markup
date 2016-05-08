@@ -25,9 +25,11 @@ Note that since Liquid was designed to be safe you can't call arbitrary methods 
 
 ### Examples
 
-Note that although presented here with C#-style notation, custom tags are usable all lowercase too (tags are conventionally all lowercase in Liquid). E.g. these are both valid: `{% Display User %}`, `{% display User %}`.
+Do note the following:
 
-Also while strings are wrapped in double quotes here single quotes (`'`) work equally.
+- Although presented here with C#-style notation, custom tags are usable all lowercase too (tags are conventionally all lowercase in Liquid). E.g. these are both valid: `{% Display User %}` and `{% display User %}`.
+- While strings are wrapped in double quotes here single quotes (`'`) work equally.
+- When passing parameters to tags you can not just pass simple strings but also variable references. E.g. these will both work: `{% Display User, Parameter1: "some value" %}` and  `{% Display User, Parameter1: Model.WorkContext.CurrentUser.UserName %}`.
 
 #### Accessing the model
 
@@ -82,7 +84,7 @@ The properties on the WorkContext (and the properties of those objects) are also
 	
 	You can also give the shape input parameters as from C#:
 	{% Display User, Parameter1: "some value", Parameter2: "some other value" %}
-	These then can be use from inside the User shape as Model.ParameterName.
+	These then can be use from inside the User shape as Model.Parameter1 and Model.Parameter2 respectively.
 
 #### Changing global properties of the HTML document
 

@@ -10,10 +10,10 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 {
     public class SetMetaTag : Tag
     {
-        private string _charset;
-        private string _content;
-        private string _httpEquiv;
-        private string _name;
+        private string _charsetParameter;
+        private string _contentParameter;
+        private string _httpEquivParameter;
+        private string _nameParameter;
 
 
         public override void Initialize(string tagName, string markup, List<string> tokens)
@@ -22,10 +22,10 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             var parameters = markup.ParseNamedParameters();
 
-            _charset = parameters.FindParameterValue("charset");
-            _content = parameters.FindParameterValue("content");
-            _httpEquiv = parameters.FindParameterValue("httpequiv");
-            _name = parameters.FindParameterValue("name");
+            _charsetParameter = parameters.FindParameterValue("charset");
+            _contentParameter = parameters.FindParameterValue("content");
+            _httpEquivParameter = parameters.FindParameterValue("httpequiv");
+            _nameParameter = parameters.FindParameterValue("name");
         }
 
         public override void Render(Context context, TextWriter result)
@@ -36,10 +36,10 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             resourceManager.SetMeta(new MetaEntry
             {
-                Charset = _charset,
-                Content = _content,
-                HttpEquiv = _httpEquiv,
-                Name = _name
+                Charset = _charsetParameter.EvaluateAsStringProducingParameter(context),
+                Content = _contentParameter.EvaluateAsStringProducingParameter(context),
+                HttpEquiv = _httpEquivParameter.EvaluateAsStringProducingParameter(context),
+                Name = _nameParameter.EvaluateAsStringProducingParameter(context)
             });
         }
     }

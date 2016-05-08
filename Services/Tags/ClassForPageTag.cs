@@ -14,15 +14,14 @@ namespace Lombiq.LiquidMarkup.Services.Tags
     {
         public override void Render(Context context, TextWriter result)
         {
-            var wc = context.GetWorkContext();
-
             // It's easier to fake every context and create a HtmlHelper to use the ClassForPage() extension. Note that
             // we also need to encode the output (and this is done in the ClassForPage() extension method)!
             using (var stringWriter = new StringWriter())
             {
-                var controllerContext = new ControllerContext(HttpContext.Current.Request.RequestContext, new DummyController());
+                var wc = context.GetWorkContext();
+                var controllerContext = new ControllerContext(wc.HttpContext.Request.RequestContext, new DummyController());
                 var html = new HtmlHelper(new ViewContext(controllerContext, new WebFormView(controllerContext, "dummy"), new ViewDataDictionary(), new TempDataDictionary(), stringWriter), new ViewPage());
-                result.Write(html.ClassForPage(_classes.Select(className => (object)className).ToArray()));
+                result.Write(html.ClassForPage(GetEvaluatedClassParameters(context)));
             }
         }
 

@@ -10,7 +10,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 {
     public class ScriptTag : Tag
     {
-        private string _resourceReference;
+        private string _resourceReferenceParameter;
         private ResourceLocation _location = ResourceLocation.Foot;
 
 
@@ -22,7 +22,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
             if (!parameters.Any()) return;
 
-            _resourceReference = parameters.First().TrimStringParameter();
+            _resourceReferenceParameter = parameters.First();
 
             if (parameters.Count() == 2 && parameters.Last().Equals("head", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -32,20 +32,23 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
         public override void Render(Context context, TextWriter result)
         {
-            if (string.IsNullOrEmpty(_resourceReference)) return;
+            if (string.IsNullOrEmpty(_resourceReferenceParameter)) return;
 
-            var wc = context.GetWorkContext();
+            var resourceManager = context.GetWorkContext().Resolve<IResourceManager>();
 
-            var resourceManager = wc.Resolve<IResourceManager>();
-
+            var evaluatedResourceReferenceParameter = _resourceReferenceParameter.EvaluateAsStringProducingParameter(context);
             RequireSettings script;
 
             // _resourceReference can be a resource name or an URL.
             if (TagName.Equals("scriptrequire", StringComparison.InvariantCultureIgnoreCase))
             {
-                script = resourceManager.Require("script", _resourceReference);
+                script = resourceManager.Require("script", evaluatedResourceReferenceParameter);
             }
-            else script = resourceManager.Include("script", _resourceReference, _resourceReference);
+            else
+            {
+                script = resourceManager
+                    .Include("script", evaluatedResourceReferenceParameter, evaluatedResourceReferenceParameter);
+            }
 
             script.Location = _location;
         }
