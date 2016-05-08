@@ -32,9 +32,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
 
         public override void Render(Context context, TextWriter result)
         {
-            var wc = HttpContext.Current.GetWorkContext();
-
-            if (wc == null) return;
+            var wc = context.GetWorkContext();
 
             var resourceManager = wc.Resolve<IResourceManager>();
 

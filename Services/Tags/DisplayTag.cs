@@ -32,9 +32,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             if (string.IsNullOrEmpty(_shapeType)) return;
 
-            var wc = HttpContext.Current.GetWorkContext();
-
-            if (wc == null) return;
+            var wc = context.GetWorkContext();
 
             if (!context.ShapeIsWithinAllowedRecursionDepth(_shapeType))
             {

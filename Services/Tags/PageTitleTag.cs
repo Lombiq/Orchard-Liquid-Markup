@@ -24,9 +24,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             if (string.IsNullOrEmpty(_title)) return;
 
-            var wc = HttpContext.Current.GetWorkContext();
-
-            if (wc == null) return;
+            var wc = context.GetWorkContext();
 
             var pageTitleBuilder = wc.Resolve<IPageTitleBuilder>();
 

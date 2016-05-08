@@ -14,9 +14,7 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             if (_classes == null || !_classes.Any()) return;
 
-            var wc = HttpContext.Current.GetWorkContext();
-
-            if (wc == null) return;
+            var wc = context.GetWorkContext();
 
             var pageClassBuilder = wc.Resolve<IPageClassBuilder>();
 

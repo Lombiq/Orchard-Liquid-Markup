@@ -1,5 +1,6 @@
 ﻿using Lombiq.LiquidMarkup;
 using Lombiq.LiquidMarkup.Models;
+using Orchard;
 using Orchard.DisplayManagement;
 
 namespace DotLiquid
@@ -30,6 +31,11 @@ namespace DotLiquid
             dynamic dynamicShape = shape;
             if (dynamicShape.ParentShape != null) return;
             dynamicShape.ParentShape = ((StaticShape)context["Model"]).Shape;
+        }
+
+        public static WorkContext GetWorkContext(this Context context)
+        {
+            return (WorkContext)((StaticShape)((StaticShape)context["Model"])["WorkContext"]).Shape;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Lombiq.LiquidMarkup.Models;
 using Lombiq.LiquidMarkup.Services.Filters;
 using Lombiq.LiquidMarkup.Services.Tags;
+using Orchard;
 using Orchard.Caching.Services;
 using Orchard.DisplayManagement.Shapes;
 
@@ -11,11 +12,13 @@ namespace Lombiq.LiquidMarkup.Services
     {
         private static bool _templateIsConfigured;
 
+        private readonly IWorkContextAccessor _wca;
         private readonly ICacheService _cacheService;
 
 
-        public LiquidTemplateService(ICacheService cacheService)
+        public LiquidTemplateService(IWorkContextAccessor wca, ICacheService cacheService)
         {
+            _wca = wca;
             _cacheService = cacheService;
         }
         
@@ -24,6 +27,7 @@ namespace Lombiq.LiquidMarkup.Services
         {
             EnsureTemplateConfigured();
 
+            model.WorkContext = _wca.GetContext();
             var templateModel = new StaticShape(model);
 
             var liquidTemplate = _cacheService.Get(liquidSource, () => Template.Parse(liquidSource));
