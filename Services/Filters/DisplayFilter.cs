@@ -12,10 +12,8 @@ namespace Lombiq.LiquidMarkup.Services.Filters
             if (input == null || !(input is StaticShape)) return string.Empty;
 
             StaticShape shape = input;
-           
-            var wc = HttpContext.Current.GetWorkContext();
 
-            if (wc == null) return string.Empty;
+            var wc = context.GetWorkContext();
 
             // Checking if the shape is displayed multiple times. If yes it can be legitimate (although rare) but
             // can also indicate unwanted recursion, so capping it.

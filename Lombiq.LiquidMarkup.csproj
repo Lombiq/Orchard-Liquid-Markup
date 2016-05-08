@@ -101,24 +101,36 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\ContextExtensions.cs" />
+    <Compile Include="Extensions\KeyValuePairExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WorkContextExtensions.cs" />
+    <Compile Include="Models\ListStaticShape.cs" />
     <Compile Include="Models\StaticShape.cs" />
+    <Compile Include="Models\StaticShapeBase.cs" />
     <Compile Include="Services\Filters\DisplayFilter.cs" />
     <Compile Include="Services\ILiquidTemplateService.cs" />
     <Compile Include="Services\LiquidTemplateProcessor.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="Services\LiquidTemplateService.cs" />
+    <Compile Include="Services\Tags\AddClassToCurrentShapeTag.cs" />
+    <Compile Include="Services\Tags\AddPageClassNamesTag.cs" />
+    <Compile Include="Services\Tags\AntiForgeryTokenOrchardTag.cs" />
+    <Compile Include="Services\Tags\AntiForgeryTokenValueOrchardTag.cs" />
+    <Compile Include="Services\Tags\ClassesParsingTagBase.cs" />
+    <Compile Include="Services\Tags\ClassForPageTag.cs" />
     <Compile Include="Services\Tags\DisplayTag.cs" />
+    <Compile Include="Services\Tags\PageTitleTag.cs" />
+    <Compile Include="Services\Tags\RegisterLinkTag.cs" />
     <Compile Include="Services\Tags\ScriptTag.cs" />
+    <Compile Include="Services\Tags\SetMetaTag.cs" />
     <Compile Include="Services\Tags\StyleTag.cs" />
     <Compile Include="Services\ViewEngine\LiquidView.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngine.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngineProvider.cs" />
-    <Compile Include="Services\WorkContextShapeInjector.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Licence.md" />
+    <Content Include="Readme.md" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
