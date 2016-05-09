@@ -8,13 +8,13 @@ using Orchard.UI.PageClass;
 
 namespace Lombiq.LiquidMarkup.Services.Tags
 {
-    public class AddPageClassNamesTag : ClassesParsingTagBase
+    public class AddPageClassNamesTag : ParametersParsingTagBase
     {
         public override void Render(Context context, TextWriter result)
         {
-            if (_classParameters == null || !_classParameters.Any()) return;
+            if (_parameters == null || !_parameters.Any()) return;
 
-            context.GetWorkContext().Resolve<IPageClassBuilder>().AddClassNames(GetEvaluatedClassParameters(context));
+            context.GetWorkContext().Resolve<IPageClassBuilder>().AddClassNames(GetEvaluatedParameters(context));
         }
     }
 }

@@ -69,6 +69,10 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\aspnetmvc\System.Web.WebPages.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Xml.Linq" />
@@ -114,7 +118,7 @@
     <Compile Include="Services\Tags\AddPageClassNamesTag.cs" />
     <Compile Include="Services\Tags\AntiForgeryTokenOrchardTag.cs" />
     <Compile Include="Services\Tags\AntiForgeryTokenValueOrchardTag.cs" />
-    <Compile Include="Services\Tags\ClassesParsingTagBase.cs" />
+    <Compile Include="Services\Tags\ParametersParsingTagBase.cs" />
     <Compile Include="Services\Tags\ClassForPageTag.cs" />
     <Compile Include="Services\Tags\DisplayTag.cs" />
     <Compile Include="Services\Tags\PageTitleTag.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Services\Tags\ScriptTag.cs" />
     <Compile Include="Services\Tags\SetMetaTag.cs" />
     <Compile Include="Services\Tags\StyleTag.cs" />
+    <Compile Include="Services\Tags\HrefTag.cs" />
     <Compile Include="Services\ViewEngine\LiquidView.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngine.cs" />
     <Compile Include="Services\ViewEngine\LiquidViewEngineProvider.cs" />
