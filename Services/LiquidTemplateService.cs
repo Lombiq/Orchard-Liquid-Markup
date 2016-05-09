@@ -86,6 +86,8 @@ namespace Lombiq.LiquidMarkup.Services
             Template.RegisterTag<StyleTag>("StyleRequire");
             Template.RegisterTag<SetMetaTag>("setmeta");
             Template.RegisterTag<SetMetaTag>("SetMeta");
+            Template.RegisterTag<HrefTag>("href");
+            Template.RegisterTag<HrefTag>("Href");
 
             // Filters:
             Template.RegisterFilter(typeof(DisplayFilter));

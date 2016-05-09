@@ -119,15 +119,20 @@ namespace Lombiq.LiquidMarkup.Models
                 // If the item is a collection then we make it indexable with an int. Otherwise wrapping e.g. a List
                 // into a StaticShape would cause an error since StaticShape implements IIndexable but the key will be
                 // attempted to be casted to string by DotLiquid.
-                var isIEnumerable = ((object)item)
-                    .GetType()
-                    .GetInterfaces()
-                    .Any(implemenetedInterface => 
-                        implemenetedInterface.IsGenericType && 
-                        implemenetedInterface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
-                if (isIEnumerable)
+                // Since Shape implements IEnumerable<object> we need to exclude it (it needs to be wrapped into a
+                // StaticShape).
+                if (!(item is Shape))
                 {
-                    return new ListStaticShape(item);
+                    var isIEnumerable = ((object)item)
+                        .GetType()
+                        .GetInterfaces()
+                        .Any(implemenetedInterface =>
+                            implemenetedInterface.IsGenericType &&
+                            implemenetedInterface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
+                    if (isIEnumerable)
+                    {
+                        return new ListStaticShape(item);
+                    }
                 }
 
                 return new StaticShape(item);
