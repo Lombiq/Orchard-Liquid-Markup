@@ -10,14 +10,14 @@ using Orchard.Mvc.Html;
 
 namespace Lombiq.LiquidMarkup.Services.Tags
 {
-    public class ClassForPageTag : ClassesParsingTagBase
+    public class ClassForPageTag : ParametersParsingTagBase
     {
         public override void Render(Context context, TextWriter result)
         {
             // It's easier to fake every context and create a HtmlHelper to use the ClassForPage() extension. Note that
             // we also need to encode the output (and this is done in the ClassForPage() extension method)!
             context.WriteHtmlHelperOutputToResult(
-                html => html.ClassForPage(GetEvaluatedClassParameters(context)),
+                html => html.ClassForPage(GetEvaluatedParameters(context)),
                 result);
         }
     }

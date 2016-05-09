@@ -6,22 +6,22 @@ using DotLiquid;
 
 namespace Lombiq.LiquidMarkup.Services.Tags
 {
-    public class ClassesParsingTagBase : Tag
+    public class ParametersParsingTagBase : Tag
     {
-        protected IEnumerable<string> _classParameters;
+        protected IEnumerable<string> _parameters;
 
 
         public override void Initialize(string tagName, string markup, List<string> tokens)
         {
             base.Initialize(tagName, markup, tokens);
 
-            _classParameters = markup.ParseParameters();
+            _parameters = markup.ParseParameters();
         }
 
 
-        protected object[] GetEvaluatedClassParameters(Context context)
+        protected object[] GetEvaluatedParameters(Context context)
         {
-            return _classParameters.Select(classParameter => classParameter.EvaluateAsParameter(context)).ToArray();
+            return _parameters.Select(classParameter => classParameter.EvaluateAsParameter(context)).ToArray();
         }
     }
 }

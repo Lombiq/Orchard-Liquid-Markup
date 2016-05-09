@@ -142,6 +142,20 @@ The properties on the WorkContext (and the properties of those objects) are also
 	Displays the value of the antiforgery token. Equivalent to using Html.AntiForgeryTokenValueOrchard(); in Razor.
 	{% AntiForgeryTokenValueOrchard %}
 
+#### Helpers
+
+	Converts an URL to an app-relative one, similar to Href() in Razor.
+	{% Href "~/Admin" %}
+	If the site root URL is example.com then this will produce "/Admin", if there is an app path like example.com/Orchard then this will produce "/Orchard/Admin". These would do exactly the same:
+	{% Href "/Admin" %}
+	{% Href "Admin" %}
+
+	So by utilizing the standard Liquid capture tag you can build dynamic URLs like following:
+	{% capture profileUrl %}~/Profile/{{ Model.WorkContext.CurrentUser.UserName }}{% endcapture %}
+	{% Href profileUrl %}
+	Or even with multiple parameters:
+	{% Href "~/Profile", Model.WorkContext.CurrentUser.UserName %}
+
 
 ## Contribution notes
 
