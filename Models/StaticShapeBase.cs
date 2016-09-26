@@ -19,13 +19,11 @@ namespace Lombiq.LiquidMarkup.Models
         /// </summary>
         protected void Initalize(dynamic shape)
         {
-            Argument.ThrowIfNull(shape, "shape");
-
             _shape = shape;
         }
 
 
-        public object ToLiquid()
+        public virtual object ToLiquid()
         {
             return this;
         }

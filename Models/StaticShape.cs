@@ -107,13 +107,10 @@ namespace Lombiq.LiquidMarkup.Models
                     item = _shape[key];
                 }
 
-                if (item == null) return null;
-
-                if (item is bool) return item;
-
-                if (item.GetType().IsPrimitive || item is decimal || item is string || item is DateTime || item is LocalizedString)
+                object liquidized;
+                if (IsSimpleObject(item, out liquidized))
                 {
-                    return item.ToString();
+                    return liquidized;
                 }
 
                 // If the item is a collection then we make it indexable with an int. Otherwise wrapping e.g. a List
@@ -137,6 +134,40 @@ namespace Lombiq.LiquidMarkup.Models
 
                 return new StaticShape(item);
             }
+        }
+
+        public override object ToLiquid()
+        {
+            object liquidized;
+            if (IsSimpleObject(_shape, out liquidized))
+            {
+                return liquidized;
+            }
+
+            return base.ToLiquid();
+        }
+
+
+        private static bool IsSimpleObject(dynamic item, out object liquidized)
+        {
+            if (item == null)
+            {
+                liquidized = null;
+                return true;
+            }
+            else if (item is bool)
+            {
+                liquidized = item;
+                return true;
+            }
+            else if (item.GetType().IsPrimitive || item is decimal || item is string || item is DateTime || item is LocalizedString)
+            {
+                liquidized = item.ToString();
+                return true;
+            }
+
+            liquidized = null;
+            return false;
         }
     }
 }
