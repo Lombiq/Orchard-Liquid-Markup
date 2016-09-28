@@ -102,7 +102,7 @@ namespace Lombiq.LiquidMarkup.Models
                 throw new InvalidOperationException("The given shape is not an enumerable and thus can't be enumerated.");
             }
 
-            return new StaticShapeEnumerator(_shape.GetEnumerator());
+            return new StaticShapeEnumerator(((IEnumerable)_shape).GetEnumerator());
         }
         #endregion
     }
