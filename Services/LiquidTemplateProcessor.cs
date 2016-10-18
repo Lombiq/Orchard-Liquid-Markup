@@ -66,7 +66,7 @@ namespace Lombiq.LiquidMarkup.Services
 
                 _reportsManager.Add(liquidReportId, ReportEntryType.Error, ex.Message);
 
-                return T("<div style=\"color:red;font-weight:bold;\">An unexpected exception was caught during rendering \"{0}\" Liquid template. {1}</div>", name, ex.Message).Text;
+                return T("<strong style=\"color:red;font-weight:bold;\">An unexpected exception was caught during rendering \"{0}\" Liquid template. {1}</strong>", name, ex.Message).Text;
             }
         }
 
