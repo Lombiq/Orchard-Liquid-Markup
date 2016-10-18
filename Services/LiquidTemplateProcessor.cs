@@ -1,6 +1,7 @@
 ﻿using Orchard.DisplayManagement.Implementation;
 using Orchard.Environment.Extensions;
 using Orchard.Exceptions;
+using Orchard.Localization;
 using Orchard.Logging;
 using Orchard.Reports;
 using Orchard.Reports.Services;
@@ -20,6 +21,7 @@ namespace Lombiq.LiquidMarkup.Services
         private readonly IReportsManager _reportsManager;
 
         public ILogger Logger { get; set; }
+        public Localizer T { get; set; }
 
 
         public string Type
@@ -34,6 +36,7 @@ namespace Lombiq.LiquidMarkup.Services
             _reportsManager = reportsManager;
 
             Logger = NullLogger.Instance;
+            T = NullLocalizer.Instance;
         }
 
 
@@ -47,21 +50,23 @@ namespace Lombiq.LiquidMarkup.Services
             {
                 if (ex.IsFatal()) throw;
 
-                var errorMessage = "An unexpected exception was caught during rendering \"" + name + "\" Liquid template.";
-                Logger.Error(ex, errorMessage);
+                Logger.Error(ex, "An unexpected exception was caught during rendering the \"" + name + "\" Liquid template.");
 
-                var reportActivityName = "LiquidTemplateErrors-" + name;
+                var reportActivityName = T("Liquid template errors: {0} shape", name).Text;
 
                 var liquidReport = _reportsManager
                     .GetReports().FirstOrDefault(report => report.ActivityName == reportActivityName);
 
                 var liquidReportId = liquidReport == null
-                    ? _reportsManager.CreateReport("Liquid template errors - " + name, reportActivityName)
+                    ? _reportsManager
+                        .CreateReport(
+                            T("Errors caught in the Liquid template of the {0} shape.", name).Text,
+                            reportActivityName)
                     : liquidReport.ReportId;
 
                 _reportsManager.Add(liquidReportId, ReportEntryType.Error, ex.Message);
 
-                return errorMessage + " " + ex.Message;
+                return T("An unexpected exception was caught during rendering \"{0}\" Liquid template. {1}", name, ex.Message).Text;
             }
         }
 
