@@ -155,6 +155,9 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{% Href profileUrl %}
 	Or even with multiple parameters:
 	{% Href "~/Profile", Model.WorkContext.CurrentUser.UserName %}
+	Or observe how we utilize capture, the Href tag and the RegisterLink to register a favicon with a dynamic URL:
+	{% capture faviconUrl %}{% Href "~/Themes/MyTheme/Images/favicon.ico" %}{% endcapture %}
+	{% RegisterLink, Href: faviconUrl, Rel: "shortcut icon", Title: "favicon", Type: "image/x-icon" %}
 
 
 ## Contribution notes
