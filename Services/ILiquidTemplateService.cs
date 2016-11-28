@@ -1,4 +1,5 @@
-﻿using Orchard;
+﻿using Lombiq.LiquidMarkup.Models;
+using Orchard;
 
 namespace Lombiq.LiquidMarkup.Services
 {
@@ -12,8 +13,9 @@ namespace Lombiq.LiquidMarkup.Services
         /// </summary>
         /// <param name="liquidSource">The Liquid-formatted source code.</param>
         /// <param name="model">Contextual model for the the template.</param>
+        /// <param name="templateRenderingContext">Contextual information about the template rendering.</param>
         /// <returns>The rendered markup.</returns>
-        string ExecuteTemplate(string liquidSource, dynamic model);
+        string ExecuteTemplate(string liquidSource, dynamic model, ITemplateRenderingContext templateRenderingContext);
 
         /// <summary>
         /// Verifies if the Liquid source code is correct. Throws exceptions on error.

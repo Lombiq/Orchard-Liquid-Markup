@@ -8,7 +8,7 @@ using Orchard.UI.Resources;
 
 namespace Lombiq.LiquidMarkup.Services.Tags
 {
-    public class ScriptTag : Tag
+    public class ScriptTag : ResourceManagingTagBase
     {
         private string _resourceReferenceParameter;
         private ResourceLocation _location = ResourceLocation.Foot;
@@ -42,12 +42,11 @@ namespace Lombiq.LiquidMarkup.Services.Tags
             // _resourceReference can be a resource name or an URL.
             if (TagName.Equals("scriptrequire", StringComparison.InvariantCultureIgnoreCase))
             {
-                script = resourceManager.Require("script", evaluatedResourceReferenceParameter);
+                script = RequireResource("script", evaluatedResourceReferenceParameter, context);
             }
             else
             {
-                script = resourceManager
-                    .Include("script", evaluatedResourceReferenceParameter, evaluatedResourceReferenceParameter);
+                script = IncludeResource("script", evaluatedResourceReferenceParameter, context);
             }
 
             script.Location = _location;

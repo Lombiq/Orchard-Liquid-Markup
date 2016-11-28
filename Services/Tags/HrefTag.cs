@@ -34,13 +34,26 @@ namespace Lombiq.LiquidMarkup.Services.Tags
                 path = "~" + path;
             }
 
-            var wc = context.GetWorkContext();
-            var webViewPage = new DummyWebViewPage
+            var resultUrl = string.Empty;
+            var workContext = context.GetWorkContext();
+
+            var pathResolver = workContext.Resolve<ITemplateItemProvidedPathResolver>();
+            var renderingContext = context.GetTemplateRenderingContext();
+            if (renderingContext.TemplateType == Models.TemplateType.TemplateContentItem && !pathResolver.IsRealVirtualPath(path))
             {
-                Context = wc.HttpContext,
-                WorkContext = wc
-            };
-            result.Write(webViewPage.Href(path, evaluatedParameters.Skip(1).ToArray()));
+                resultUrl = pathResolver.GenerateUrlFromPath(path);
+            }
+            else
+            {
+                var webViewPage = new DummyWebViewPage
+                {
+                    Context = workContext.HttpContext,
+                    WorkContext = workContext
+                };
+                resultUrl = webViewPage.Href(path, evaluatedParameters.Skip(1).ToArray());
+            }
+
+            result.Write(resultUrl);
         }
 
 

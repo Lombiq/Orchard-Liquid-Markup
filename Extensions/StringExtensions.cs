@@ -24,6 +24,7 @@ namespace System
 
         public static string TrimStringParameter(this string input)
         {
+            if (input == null) return null;
             return input.Trim().Trim('"', '\'');
         }
 
@@ -42,6 +43,8 @@ namespace System
 
         public static bool IsStringParameter(this string parameterValue)
         {
+            if (parameterValue == null) return true;
+
             var trimmedParameterValue = parameterValue.Trim();
             return
                 trimmedParameterValue.StartsWith("\"") && trimmedParameterValue.EndsWith("\"") ||

@@ -8,6 +8,7 @@ using Orchard.Reports.Services;
 using Orchard.Templates.Services;
 using System;
 using System.Linq;
+using Lombiq.LiquidMarkup.Models;
 
 namespace Lombiq.LiquidMarkup.Services
 {
@@ -44,7 +45,13 @@ namespace Lombiq.LiquidMarkup.Services
         {
             try
             {
-                return _templateService.ExecuteTemplate(template, model);
+                var renderingContext = new TemplateRenderingContext
+                {
+                    TemplateType = TemplateType.TemplateContentItem,
+                    TemplatePath = name
+                };
+
+                return _templateService.ExecuteTemplate(template, model, renderingContext);
             }
             catch (Exception ex)
             {
