@@ -14,5 +14,10 @@ namespace Lombiq.LiquidMarkup
         /// unwanted recursion. This configuration is a cap for the display count.
         /// </summary>
         public const int MaxAllowedShapeDisplayCount = 10;
+
+        /// <summary>
+        /// Key for the Liquid context value storing the <see cref="Models.TemplateRenderingContext"/> object.
+        /// </summary>
+        public const string TemplateRenderingContextKey = "TemplateRenderingContext";
     }
 }

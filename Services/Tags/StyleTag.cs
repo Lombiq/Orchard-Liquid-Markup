@@ -7,7 +7,7 @@ using Orchard.UI.Resources;
 
 namespace Lombiq.LiquidMarkup.Services.Tags
 {
-    public class StyleTag : Tag
+    public class StyleTag : ResourceManagingTagBase
     {
         private string _resourceReferenceParameter;
 
@@ -23,18 +23,16 @@ namespace Lombiq.LiquidMarkup.Services.Tags
         {
             if (string.IsNullOrEmpty(_resourceReferenceParameter)) return;
 
-            var resourceManager = context.GetWorkContext().Resolve<IResourceManager>();
             var evaluatedResourceReferenceParameter = _resourceReferenceParameter.EvaluateAsStringProducingParameter(context);
 
             // _resourceReference can be a resource name or an URL.
             if (TagName.Equals("stylerequire", StringComparison.InvariantCultureIgnoreCase))
             {
-                resourceManager.Require("stylesheet", evaluatedResourceReferenceParameter);
+                RequireResource("stylesheet", evaluatedResourceReferenceParameter, context);
             }
             else
             {
-                resourceManager
-                    .Include("stylesheet", evaluatedResourceReferenceParameter, evaluatedResourceReferenceParameter);
+                IncludeResource("stylesheet", evaluatedResourceReferenceParameter, context);
             }
         }
     }
