@@ -13,11 +13,11 @@ Orchard module for adding support for templates written in Liquid Markup (http:/
 
 This module adds the ability to use shape templates written in [Liquid Markup](http://liquidmarkup.org/) and uses the [DotLiquid library](http://dotliquidmarkup.org/). [See what Liquid offers](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers). The module is also available for [DotNest](http://dotnest.com/) sites for templating.
 
-Naming conventions are C#-style: this means that all the properties you can access on viewmodels from your templates will have the same names as usual but built-in Liquid filters (like upcase) will also behave in the same way (i.e. you'll be able to use it as Upcase).
+**Naming conventions are C#-style!** This means that all the properties you can access on viewmodels from your templates will have the same names as usual but built-in Liquid filters (like `upcase`) will also behave in the same way (i.e. you'll be able to use it as `Upcase`).
 
 There are the following features in the module:
 
-- Liquid Markup: doesn't provide any user-accessible features.
+- Liquid Markup: doesn't provide any user-accessible features, just basic services.
 - Liquid Markup Templates: extends Orchard.Templates so you can write Liquid templates from the admin.
 - Liquid Markup View Engine: adds a view engine that enables you to use .liquid Liquid-formatted templates in your themes and modules. You can use this to develop Liquid templates quickly from an IDE.
 
