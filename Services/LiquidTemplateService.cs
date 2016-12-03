@@ -23,7 +23,7 @@ namespace Lombiq.LiquidMarkup.Services
         }
         
     
-        public string ExecuteTemplate(string liquidSource, dynamic model)
+        public string ExecuteTemplate(string liquidSource, dynamic model, ITemplateRenderingContext templateExecutionContext)
         {
             EnsureTemplateConfigured();
 
@@ -31,9 +31,11 @@ namespace Lombiq.LiquidMarkup.Services
             var templateModel = new StaticShape(model);
 
             var liquidTemplate = _cacheService.Get(liquidSource, () => Template.Parse(liquidSource));
+            var localVariablesHash = Hash.FromAnonymousObject(new { Model = templateModel });
+            localVariablesHash[Constants.TemplateRenderingContextKey] = templateExecutionContext;
             return liquidTemplate.Render(new RenderParameters
             {
-                LocalVariables = Hash.FromAnonymousObject(new { Model = templateModel }),
+                LocalVariables = localVariablesHash,
                 RethrowErrors = true
             });
         }

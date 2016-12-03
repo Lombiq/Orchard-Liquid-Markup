@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Web.Mvc;
+using Lombiq.LiquidMarkup.Models;
 using Orchard.Environment.Extensions;
 
 namespace Lombiq.LiquidMarkup.Services.ViewEngine
@@ -24,7 +25,14 @@ namespace Lombiq.LiquidMarkup.Services.ViewEngine
         public void Render(ViewContext context, TextWriter writer)
         {
             var filename = context.HttpContext.Server.MapPath(ViewPath);
-            var output = _liquidTemplateService.ExecuteTemplate(File.ReadAllText(filename), context.ViewData.Model);
+
+            var renderingContext = new TemplateRenderingContext
+            {
+                TemplateType = TemplateType.TemplateFile,
+                TemplatePath = ViewPath
+            };
+
+            var output = _liquidTemplateService.ExecuteTemplate(File.ReadAllText(filename), context.ViewData.Model, renderingContext);
             writer.Write(output);
         }
     }

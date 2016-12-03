@@ -3,14 +3,14 @@ AntiForgery: enabled
 Author: Lombiq
 Website: https://github.com/Lombiq/Orchard-Liquid-Markup
 Version: 1.0
-OrchardVersion: 1.10
+OrchardVersion: 1.10.1
 Description: Adds support for templates written in Liquid Markup (http://liquidmarkup.org/). Uses DotLiquid (http://dotliquidmarkup.org/).
 Features:
     Lombiq.LiquidMarkup:
         Name: Liquid Markup
         Description: Adds support for templates written in Liquid Markup (http://liquidmarkup.org/). Uses DotLiquid (http://dotliquidmarkup.org/).
         Category: Developer
-        Dependencies: Orchard.Caching
+        Dependencies: Orchard.Caching, Piedone.HelpfulLibraries.Utilities
     Lombiq.LiquidMarkup.Templates:
         Name: Liquid Markup Templates
         Description: Extends Orchard.Templates with adding user-editable templates written in Liquid Markup (http://liquidmarkup.org/).

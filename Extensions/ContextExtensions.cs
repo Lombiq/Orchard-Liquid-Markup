@@ -5,6 +5,7 @@ using Lombiq.LiquidMarkup;
 using Lombiq.LiquidMarkup.Models;
 using Orchard;
 using Orchard.DisplayManagement;
+using System.Linq;
 
 namespace DotLiquid
 {
@@ -61,6 +62,15 @@ namespace DotLiquid
 
                 result.Write(outputFactory(htmlHelper));
             }
+        }
+
+        public static ITemplateRenderingContext GetTemplateRenderingContext(this Context context)
+        {
+            var templateRenderingContext = context.Environments
+                .Where(hash => hash.Any())
+                .Select(hash => hash[Constants.TemplateRenderingContextKey])
+                .SingleOrDefault();
+            return templateRenderingContext as ITemplateRenderingContext;
         }
 
 
