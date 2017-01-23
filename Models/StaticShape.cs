@@ -4,6 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Web;
 using DotLiquid;
 using Microsoft.CSharp.RuntimeBinder;
 using Orchard.DisplayManagement.Shapes;
@@ -160,7 +161,12 @@ namespace Lombiq.LiquidMarkup.Models
                 liquidized = item;
                 return true;
             }
-            else if (item.GetType().IsPrimitive || item is decimal || item is string || item is DateTime || item is LocalizedString)
+            else if (item.GetType().IsPrimitive || 
+                item is decimal || 
+                item is string || 
+                item is DateTime || 
+                item is LocalizedString || 
+                item is HtmlString)
             {
                 liquidized = item.ToString();
                 return true;
