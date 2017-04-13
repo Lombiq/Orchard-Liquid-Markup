@@ -111,7 +111,7 @@ namespace Lombiq.LiquidMarkup.Models
                 object liquidized;
                 if (IsSimpleObject(item, out liquidized))
                 {
-                    return liquidized;
+                    return item;
                 }
 
                 // If the item is a collection then we make it indexable with an int. Otherwise wrapping e.g. a List
@@ -144,6 +144,10 @@ namespace Lombiq.LiquidMarkup.Models
             {
                 return liquidized;
             }
+            else if (_shape is LocalizedString || _shape is HtmlString)
+            {
+                return _shape.ToString();
+            }
 
             return base.ToLiquid();
         }
@@ -151,22 +155,20 @@ namespace Lombiq.LiquidMarkup.Models
 
         private static bool IsSimpleObject(dynamic item, out object liquidized)
         {
+            // For types that DotLiquid handles OOTB, see: https://github.com/dotliquid/dotliquid/blob/master/src/DotLiquid/Context.cs#L424
             if (item == null)
             {
                 liquidized = null;
                 return true;
             }
-            else if (item is bool)
+            else if (item is bool || item is string)
             {
                 liquidized = item;
                 return true;
             }
             else if (item.GetType().IsPrimitive || 
                 item is decimal || 
-                item is string || 
-                item is DateTime || 
-                item is LocalizedString || 
-                item is HtmlString)
+                item is DateTime)
             {
                 liquidized = item.ToString();
                 return true;
