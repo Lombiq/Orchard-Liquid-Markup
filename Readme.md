@@ -69,6 +69,7 @@ The properties on the WorkContext (and the properties of those objects) are also
 	Including stylesheets and scripts:
 	{% Style "/url/to/stylesheet.css" %}
 	You can omit the single quotes or use double quotes instead if you wish.
+	Note that relative virtual paths (like "~/Themes/MyTheme/Styles/styles.css") will work too as usual.
 	
 	{% Script "/url/to/script.js", head %}
 	The second parameter is the script location: head or foot. The default is foot so you can omit the parameter if you want to include the script in the footer.
