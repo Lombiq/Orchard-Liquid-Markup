@@ -27,8 +27,9 @@ namespace Lombiq.LiquidMarkup.Services
         {
             EnsureTemplateConfigured();
 
-            model.WorkContext = _wca.GetContext();
-            var templateModel = new StaticShape(model);
+            var workContext = _wca.GetContext();
+            model.WorkContext = workContext; 
+            var templateModel = new StaticShape(model, workContext);
 
             var liquidTemplate = _cacheService.Get(liquidSource, () => Template.Parse(liquidSource));
             var localVariablesHash = Hash.FromAnonymousObject(new { Model = templateModel });

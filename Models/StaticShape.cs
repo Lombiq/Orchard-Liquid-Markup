@@ -6,7 +6,9 @@ using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Web;
 using DotLiquid;
+using Lombiq.LiquidMarkup.Services;
 using Microsoft.CSharp.RuntimeBinder;
+using Orchard;
 using Orchard.DisplayManagement.Shapes;
 using Orchard.Localization;
 using Orchard.Validation;
@@ -16,6 +18,8 @@ namespace Lombiq.LiquidMarkup.Models
     // Similar in idea to the StaticShape class in OrchardHUN.Scripting.Php
     public class StaticShape : StaticShapeBase, IIndexable
     {
+        private readonly WorkContext _workContext;
+
         public dynamic Shape { get { return _shape; } }
         public ShapeMetadata Metadata { get { return _shape.Metadata; } }
         public dynamic Id { get { return _shape.Id; } } // Depending on the shape the Id can be an int or string too.
@@ -25,8 +29,9 @@ namespace Lombiq.LiquidMarkup.Models
         public IEnumerable<dynamic> Items { get { return _itemsLazy.Value; } }
 
 
-        public StaticShape(dynamic shape)
+        public StaticShape(dynamic shape, WorkContext workContext)
         {
+            _workContext = workContext;
             Initalize(shape);
 
             _itemsLazy = new Lazy<IEnumerable<dynamic>>(() =>
@@ -34,7 +39,7 @@ namespace Lombiq.LiquidMarkup.Models
                 var items = new List<StaticShape>();
                 foreach (var item in _shape.Items)
                 {
-                    items.Add(new StaticShape(item));
+                    items.Add(new StaticShape(item, workContext));
                 }
                 return items;
             });
@@ -91,13 +96,29 @@ namespace Lombiq.LiquidMarkup.Models
                             var dynamicMetaObjectProvider = _shape as IDynamicMetaObjectProvider;
                             if (dynamicMetaObjectProvider != null)
                             {
-                                var objectParameter = Expression.Parameter(typeof(object));
-                                var metaObject = dynamicMetaObjectProvider.GetMetaObject(objectParameter);
-                                var binder = (GetMemberBinder)Microsoft.CSharp.RuntimeBinder.Binder.GetMember(0, keyString, shapeType, new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(0, null) });
-                                var getMemberBinding = metaObject.BindGetMember(binder);
-                                var finalExpression = Expression.Block(Expression.Label(CallSiteBinder.UpdateLabel), getMemberBinding.Expression);
-                                var lambda = Expression.Lambda(finalExpression, objectParameter);
-                                var compiledDelegate = lambda.Compile();
+                                // Since this is caching a delegate it needs to be an instance-local cache.
+                                // This needs to be cached, otherwise on every access there would be a RuntimeBinderException,
+                                // see: https://github.com/OrchardCMS/Orchard/issues/4600
+                                // ICacheManager can't be used, because it would result in the following 
+                                // DependencyResolutionException exception:
+                                // None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' 
+                                // on type 'Orchard.Caching.DefaultCacheManager' can be invoked with the available 
+                                // services and parameters: Cannot resolve parameter 'System.Type component' of constructor 
+                                // 'Void .ctor(System.Type, Orchard.Caching.ICacheHolder)'.
+                                var compiledDelegate = _workContext
+                                    .Resolve<IDynamicShapePropertyAccessDelegateCache>()
+                                    .GetCachedDelegate(shapeType, keyString,
+                                    () =>
+                                    {
+                                        var objectParameter = Expression.Parameter(typeof(object));
+                                        var metaObject = dynamicMetaObjectProvider.GetMetaObject(objectParameter);
+                                        var binder = (GetMemberBinder)Microsoft.CSharp.RuntimeBinder.Binder.GetMember(0, keyString, shapeType, new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(0, null) });
+                                        var getMemberBinding = metaObject.BindGetMember(binder);
+                                        var finalExpression = Expression.Block(Expression.Label(CallSiteBinder.UpdateLabel), getMemberBinding.Expression);
+                                        var lambda = Expression.Lambda(finalExpression, objectParameter);
+                                        return lambda.Compile();
+                                    });
+
                                 item = compiledDelegate.DynamicInvoke(_shape);
                             }
                         }
@@ -129,11 +150,11 @@ namespace Lombiq.LiquidMarkup.Models
                             implemenetedInterface.GetGenericTypeDefinition() == typeof(IEnumerable<>));
                     if (isIEnumerable)
                     {
-                        return new ListStaticShape(item);
+                        return new ListStaticShape(item, _workContext);
                     }
                 }
 
-                return new StaticShape(item);
+                return new StaticShape(item, _workContext);
             }
         }
 
@@ -166,8 +187,8 @@ namespace Lombiq.LiquidMarkup.Models
                 liquidized = item;
                 return true;
             }
-            else if (item.GetType().IsPrimitive || 
-                item is decimal || 
+            else if (item.GetType().IsPrimitive ||
+                item is decimal ||
                 item is DateTime)
             {
                 liquidized = item.ToString();

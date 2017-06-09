@@ -4,17 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DotLiquid;
+using Orchard;
 
 namespace Lombiq.LiquidMarkup.Models
 {
     // We need to implement IList since that is only what DotLiquid understands.
     public class ListStaticShape : StaticShapeBase, IList
     {
+        private readonly WorkContext _workContext;
+
         public object this[int index]
         {
             get
             {
-                return new StaticShape(_shape)[index];
+                return new StaticShape(_shape, _workContext)[index];
             }
             set
             {
@@ -23,8 +26,9 @@ namespace Lombiq.LiquidMarkup.Models
         }
 
 
-        public ListStaticShape(dynamic shape)
+        public ListStaticShape(dynamic shape, WorkContext workContext)
         {
+            _workContext = workContext;
             Initalize(shape);
         }
 
@@ -102,7 +106,7 @@ namespace Lombiq.LiquidMarkup.Models
                 throw new InvalidOperationException("The given shape is not an enumerable and thus can't be enumerated.");
             }
 
-            return new StaticShapeEnumerator(((IEnumerable)_shape).GetEnumerator());
+            return new StaticShapeEnumerator(((IEnumerable)_shape).GetEnumerator(), _workContext);
         }
         #endregion
     }

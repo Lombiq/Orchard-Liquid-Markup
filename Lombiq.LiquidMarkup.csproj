@@ -140,7 +140,9 @@
     <Compile Include="Models\StaticShapeEnumerator.cs" />
     <Compile Include="Models\TemplateRenderingContext.cs" />
     <Compile Include="Services\DefaultTemplateItemProvidedPathResolver.cs" />
+    <Compile Include="Services\DynamicShapePropertyAccessDelegateCache.cs" />
     <Compile Include="Services\Filters\DisplayFilter.cs" />
+    <Compile Include="Services\IDynamicShapePropertyAccessDelegateCache.cs" />
     <Compile Include="Services\ILiquidTemplateService.cs" />
     <Compile Include="Services\ITemplateItemProvidedPathResolver.cs" />
     <Compile Include="Services\LiquidTemplateProcessor.cs" />
