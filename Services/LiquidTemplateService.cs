@@ -94,6 +94,7 @@ namespace Lombiq.LiquidMarkup.Services
 
             // Filters:
             Template.RegisterFilter(typeof(DisplayFilter));
+            Template.RegisterFilter(typeof(DisplayChildrenFilter));
 
             _templateIsConfigured = true;
         }

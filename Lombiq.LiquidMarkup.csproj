@@ -133,6 +133,7 @@
     <Compile Include="Extensions\KeyValuePairExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WorkContextExtensions.cs" />
+    <Compile Include="Helpers\ShapeDisplayHelper.cs" />
     <Compile Include="Models\ITemplateRenderingContext.cs" />
     <Compile Include="Models\ListStaticShape.cs" />
     <Compile Include="Models\StaticShape.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Models\TemplateRenderingContext.cs" />
     <Compile Include="Services\DefaultTemplateItemProvidedPathResolver.cs" />
     <Compile Include="Services\DynamicShapePropertyAccessDelegateCache.cs" />
+    <Compile Include="Services\Filters\DisplayChildrenFilter.cs" />
     <Compile Include="Services\Filters\DisplayFilter.cs" />
     <Compile Include="Services\IDynamicShapePropertyAccessDelegateCache.cs" />
     <Compile Include="Services\ILiquidTemplateService.cs" />

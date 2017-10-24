@@ -85,6 +85,9 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{{ Model.Content | Display }}
 	</article>
 	Note that there are no quotes around Model.Content!
+
+	Similarly you can also display the shape's children (like in a Menu shape override):
+	{{ Model | DisplayChildren }}
 	
 	Displaying any shape with the display tag, here the User shape:
 	{% Display User %}

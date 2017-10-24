@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using DotLiquid;
+using Lombiq.LiquidMarkup.Helpers;
 using Lombiq.LiquidMarkup.Models;
 using Orchard.DisplayManagement;
 
@@ -13,31 +14,12 @@ namespace Lombiq.LiquidMarkup.Services.Filters
 
             StaticShape shape = input;
 
-            var wc = context.GetWorkContext();
-
-            // Checking if the shape is displayed multiple times. If yes it can be legitimate (although rare) but
-            // can also indicate unwanted recursion, so capping it.
-            if (shape.Shape.DisplayedCount == null) shape.Shape.DisplayedCount = 0;
-
-            if (shape.Shape.DisplayedCount >= Constants.MaxAllowedShapeDisplayCount)
+            if (!ShapeDisplayHelper.IsShapeDisplayAllowed(typeof(DisplayChildrenFilter), context, shape))
             {
-                wc.LogSecurityNotificationWithContext(typeof(DisplayFilter), "Too many displays of the same shape prevented.");
-                
                 return string.Empty;
             }
 
-            shape.Shape.DisplayedCount++;
-
-            if (!context.ShapeIsWithinAllowedRecursionDepth(shape.Metadata.Type))
-            {
-                wc.LogSecurityNotificationWithContext(typeof(DisplayFilter), "Too many recursive shape displays prevented.");
-
-                return string.Empty;
-            }
-
-            context.AddCurrentShapeAsParentToShape((IShape)shape.Shape);
-
-            return wc.Resolve<IShapeDisplay>().Display(shape.Shape);
+            return context.GetWorkContext().Resolve<IShapeDisplay>().Display(shape.Shape);
         }
     }
 }
