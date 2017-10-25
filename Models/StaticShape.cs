@@ -58,7 +58,10 @@ namespace Lombiq.LiquidMarkup.Models
                 var keyString = key.ToString();
 
                 // Is key referring to a property on this class?
-                if (typeof(StaticShape).GetProperties().Any(property => property.Name == keyString))
+                // The Item property will be found as a property of this object since it is reserved for the indexer.
+                // It has to be skipped otherwise the Item property of the wrapped Shape won't be available.
+                // See: https://msdn.microsoft.com/en-us/library/1y4s51k3(v=vs.110).aspx#Anchor_2
+                if (keyString != "Item" && typeof(StaticShape).GetProperties().Any(property => property.Name == keyString))
                 {
                     return typeof(StaticShape).GetProperty(keyString).GetValue(this, null);
                 }
