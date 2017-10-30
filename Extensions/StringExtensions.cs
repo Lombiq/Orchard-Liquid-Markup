@@ -39,8 +39,8 @@ namespace System
             var parameterChunks = "";
             foreach (var parameter in parametersSplit)
             {
-                if (parameter.CountOfCharacter('\'') == 1 || 
-                    parameter.CountOfCharacter('"') == 1)
+                if (parameter.CharacterCount('\'') == 1 || 
+                    parameter.CharacterCount('"') == 1)
                 {
                     if (parameterChunks.Any())
                     {
@@ -98,9 +98,8 @@ namespace System
             if (evaluatedParameter is string) return (string)evaluatedParameter;
             return evaluatedParameter.ToString();
         }
-
-
-        public static int CountOfCharacter(this string text, char character) =>
+        
+        public static int CharacterCount(this string text, char character) =>
             text.Split(character).Length - 1;
     }
 }
