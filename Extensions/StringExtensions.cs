@@ -35,6 +35,8 @@ namespace System
             var parametersSplit = parametersCommaSeparated
                 .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
+            // Some parameter values could also contain commas so these are also split. 
+            // These chunks need to be concatenated.
             var parameters = new List<string>();
             var parameterChunks = "";
             foreach (var parameter in parametersSplit)
@@ -42,7 +44,7 @@ namespace System
                 if (parameter.CharacterCount('\'') == 1 || 
                     parameter.CharacterCount('"') == 1)
                 {
-                    if (parameterChunks.Any())
+                    if (!string.IsNullOrEmpty(parameterChunks))
                     {
                         parameters.Add(parameterChunks + parameter);
 
@@ -56,7 +58,7 @@ namespace System
                     continue;
                 }
 
-                if (parameterChunks.Any())
+                if (!string.IsNullOrEmpty(parameterChunks))
                 {
                     parameterChunks += parameter + ",";
                 }
@@ -100,6 +102,6 @@ namespace System
         }
         
         public static int CharacterCount(this string text, char character) =>
-            text.Split(character).Length - 1;
+            text.Count(characterInText => characterInText == character);
     }
 }
