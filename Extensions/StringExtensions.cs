@@ -9,7 +9,7 @@ namespace System
         public static KeyValuePair<string, string> ParseAsNamedParameter(this string parameterNameAndValue)
         {
             parameterNameAndValue = parameterNameAndValue.Trim();
-            
+
             var colonIndex = parameterNameAndValue.IndexOf(':');
 
             if (colonIndex == -1)
@@ -30,10 +30,45 @@ namespace System
 
         public static IEnumerable<string> ParseParameters(this string parametersCommaSeparated)
         {
-            parametersCommaSeparated = parametersCommaSeparated.Trim();
-            return parametersCommaSeparated
-                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                .Select(parameter => parameter.Trim());
+            parametersCommaSeparated = parametersCommaSeparated.Trim(',', ' ');
+
+            var parametersSplit = parametersCommaSeparated
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Some parameter values could also contain commas so these are also split. 
+            // These chunks need to be concatenated.
+            var parameters = new List<string>();
+            var parameterChunks = "";
+            foreach (var parameter in parametersSplit)
+            {
+                if (parameter.CharacterCount('\'') == 1 || 
+                    parameter.CharacterCount('"') == 1)
+                {
+                    if (!string.IsNullOrEmpty(parameterChunks))
+                    {
+                        parameters.Add(parameterChunks + parameter);
+
+                        parameterChunks = "";
+                    }
+                    else
+                    {
+                        parameterChunks += parameter + ",";
+                    }
+
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(parameterChunks))
+                {
+                    parameterChunks += parameter + ",";
+                }
+                else
+                {
+                    parameters.Add(parameter);
+                }
+            }
+
+            return parameters;
         }
 
         public static IEnumerable<KeyValuePair<string, string>> ParseNamedParameters(this string parametersCommaSeparated)
@@ -65,5 +100,8 @@ namespace System
             if (evaluatedParameter is string) return (string)evaluatedParameter;
             return evaluatedParameter.ToString();
         }
+        
+        public static int CharacterCount(this string text, char character) =>
+            text.Count(characterInText => characterInText == character);
     }
 }
