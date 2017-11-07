@@ -5,6 +5,7 @@ using Lombiq.LiquidMarkup.Services.Tags;
 using Orchard;
 using Orchard.Caching.Services;
 using Orchard.DisplayManagement.Shapes;
+using System.Globalization;
 
 namespace Lombiq.LiquidMarkup.Services
 {
@@ -34,11 +35,12 @@ namespace Lombiq.LiquidMarkup.Services
             var liquidTemplate = _cacheService.Get(liquidSource, () => Template.Parse(liquidSource));
             var localVariablesHash = Hash.FromAnonymousObject(new { Model = templateModel });
             localVariablesHash[Constants.TemplateRenderingContextKey] = templateExecutionContext;
-            return liquidTemplate.Render(new RenderParameters
-            {
-                LocalVariables = localVariablesHash,
-                RethrowErrors = true
-            });
+
+            var renderParameters = new RenderParameters(CultureInfo.GetCultureInfo(workContext.CurrentCulture));
+            renderParameters.LocalVariables = localVariablesHash;
+            renderParameters.ErrorsOutputMode = ErrorsOutputMode.Rethrow;
+
+            return liquidTemplate.Render(renderParameters);
         }
 
         public void VerifySource(string liquidSource)
