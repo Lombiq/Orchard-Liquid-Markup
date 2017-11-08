@@ -68,7 +68,7 @@ namespace System
                 }
             }
 
-            return parameters;
+            return parameters.Select(parameter => parameter.Trim());
         }
 
         public static IEnumerable<KeyValuePair<string, string>> ParseNamedParameters(this string parametersCommaSeparated)
