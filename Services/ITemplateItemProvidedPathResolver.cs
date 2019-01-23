@@ -13,7 +13,7 @@ namespace Lombiq.LiquidMarkup.Services
     public interface ITemplateItemProvidedPathResolver : IDependency
     {
         /// <summary>
-        /// Checkes whether the given virtual path is one that should actually be handled as a virtual path. Since
+        /// Checks whether the given virtual path is one that should actually be handled as a virtual path. Since
         /// virtual paths in template items don't necessarily need to work in the same way as standard virtual paths
         /// (like in templates deployed as part of Media Themes on DotNest, see: 
         /// https://dotnest.com/knowledge-base/topics/theming/writing-a-dotnest-theme-from-scratch) this is a check.
