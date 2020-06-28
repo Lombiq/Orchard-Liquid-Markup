@@ -1,8 +1,8 @@
-# Orchard Liquid Markup Readme
+# Orchard Liquid Markup
 
 
 
-## Project Description
+## About
 
 Orchard module for adding support for templates written in Liquid Markup (http://liquidmarkup.org/). Uses DotLiquid (http://dotliquidmarkup.org/).
 
@@ -164,14 +164,8 @@ The properties on the WorkContext (and the properties of those objects) are also
 	{% RegisterLink, Href: faviconUrl, Rel: "shortcut icon", Title: "favicon", Type: "image/x-icon" %}
 
 
-## Contribution notes
+## Contributing and support
 
-The module's source is available in two public source repositories, automatically mirrored in both directions with [Git-hg Mirror](https://githgmirror.com):
+Bug reports, feature requests, comments, questions, code contributions, and love letters are warmly welcome, please do so via GitHub issues and pull requests. Please adhere to our [open-source guidelines](https://lombiq.com/open-source-guidelines) while doing so.
 
-- [https://bitbucket.org/Lombiq/orchard-liquid-markup](https://bitbucket.org/Lombiq/orchard-liquid-markup) (Mercurial repository)
-- [https://github.com/Lombiq/Orchard-Liquid-Markup](https://github.com/Lombiq/Orchard-Liquid-Markup) (Git repository)
-
-Bug reports, feature requests and comments are warmly welcome, **please do so via GitHub**.
-Feel free to send pull requests too, no matter which source repository you choose for this purpose.
-
-This project is developed by [Lombiq Technologies Ltd](http://lombiq.com/). Commercial-grade support is available through Lombiq.
+This project is developed by [Lombiq Technologies](https://lombiq.com/). Commercial-grade support is available through Lombiq.
